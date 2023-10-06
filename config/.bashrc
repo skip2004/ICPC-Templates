@@ -1,0 +1,1 @@
+export CXXFLAGS='-g -Wall -std=c++20 -Dzqj'

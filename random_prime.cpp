@@ -1,0 +1,54 @@
+#include<bits/stdc++.h>
+using std::cin;
+using std::cout;
+using ll = long long;
+using u64 = unsigned long long;
+using f64 = long double;
+ll p;
+f64 invp;
+void setmod(ll x) {
+	p = x, invp = (f64) 1 / x;
+}
+ll mul(ll a, ll b) {
+	ll z = a * invp * b + 0.5;
+	ll res = a * b - z * p;
+	return res + (res >> 63 & p);
+}
+ll pow(ll a, ll x, ll res = 1) {
+	for(;x;x >>= 1, a = mul(a, a))
+		if(x & 1) res = mul(res, a);
+	return res;
+}
+bool checkprime(ll p) {
+	if(p == 1) return 0;
+	setmod(p);
+	ll d = __builtin_ctzll(p - 1), s = (p - 1) >> d;
+	for(ll a : {2, 3, 5, 7, 11, 13, 82, 373}) {
+		if(a % p == 0)
+			continue;
+		ll x = pow(a, s), y;
+		for(int i = 0;i < d;++i, x = y) {
+			y = mul(x, x);
+			if(y == 1 && x != 1 && x != p - 1)
+				return 0;
+		}
+		if(x != 1) return 0;
+	}
+	return 1;
+}
+
+int main() {
+	std::ios::sync_with_stdio(false), cin.tie(0);
+	std::mt19937_64 gen(1145141919811);
+	for(int i = 0;i < 10;++i) {
+		ll x;
+		do {
+			if(i < 5) {
+				x = gen() % (ll) 1e8 + (ll)9e8;
+			} else {
+				x = gen() % (ll) 1e17 + (ll)9e17;
+			}
+		} while(!checkprime(x));
+		cout << x << "\n\n";
+	}
+}

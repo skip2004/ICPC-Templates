@@ -1,0 +1,356 @@
+% xelatex -shell-escape main.tex
+\documentclass[landscape, twocolumn, a4paper]{article}
+\usepackage{graphicx, amssymb, amsmath, textcomp, booktabs}
+\usepackage[libertine,vvarbb]{newtxmath}
+\usepackage[scr=rsfso]{mathalfa}
+\usepackage[T1]{fontenc} % best for Western European languages
+\usepackage{minted}
+\usepackage{listings, color, setspace, titlesec, fancyhdr, mdframed, multicol}
+\usepackage{ucharclasses}
+\usepackage{xunicode, xltxtra}
+\usepackage[inner=1.35cm, outer=0.9cm, top=1.2cm, bottom=1.2cm]{geometry}
+\usepackage{pdfpages}
+\usepackage{tocloft}
+\usepackage{nameref}
+\usepackage{verbatim}
+\usepackage{relsize}
+\usepackage{fontspec}
+\usepackage[colorlinks, linkcolor = black]{hyperref}
+\usepackage[table]{xcolor}
+\usepackage{tabularx}
+% configure fonts
+% if not using CJK
+% \newfontfamily\substitutefont{SimSun}[Scale=0.8,BoldFont=SimHei]
+% \setTransitionsForChinese{\begingroup\substitutefont}{\endgroup}
+\usepackage{xeCJK}
+\setCJKmainfont{SimHei}[Scale=0.8]
+\setCJKmonofont{SimHei}[Scale=0.8]
+\setCJKsansfont{KaiTi}[Scale=0.8]
+
+\setmainfont{Linux Libertine O}[Scale=0.925]
+\setmonofont[Path=font/]{FiraCode-Regular}[Scale=0.8]
+%\setsansfont{Gill Sans Medium}
+
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt
+
+\title{\fontsize{64.0pt}{\baselineskip}\selectfont Let it Rot}
+\date{}
+
+
+\setminted[cpp]{
+	style=xcode,
+	mathescape,
+	linenos,
+	autogobble,
+	baselinestretch=0.8,
+	tabsize=3,
+	fontsize=\normalsize,
+	%bgcolor=Gray,
+	frame=single,
+	framesep=1mm,
+	framerule=0.3pt,
+	numbersep=1mm,
+	breaklines=true,
+	breaksymbolsepleft=2pt,
+%	breaksymbolleft=\raisebox{0.8ex}{ \small\reflectbox{\carriagereturn}}, %not moe!
+%	breaksymbolright=\small\carriagereturn,
+	breakbytoken=false,
+	showtabs=true,
+	tab={\relscale{0.6} $\big\vert \ \ \ $ \relscale{1}},
+}
+
+\begin{document}
+\begin{titlepage}
+\maketitle
+
+\thispagestyle{empty}
+\pagebreak
+\end{titlepage}
+
+\pagestyle{fancy}
+    \lhead{\Huge \thepage}
+    \chead{\large 北京大学-摆烂人}
+    \rhead{\Huge \thepage}
+    \lfoot{\Huge \thepage}
+    \cfoot{\large PKU-Let it Rot}
+    \rfoot{\Huge \thepage}
+
+\setcounter{tocdepth}{3}
+		\begingroup
+		\let\cleardoublepage\relax
+		\let\clearpage\relax
+		\begin{small}
+		\begin{spacing}{0.75}
+		\tableofcontents
+		\end{spacing}
+		\end{small}
+
+	
+\section{图论}
+
+\subsection{欧拉回路} % !!! pb
+\inputminted{cpp}{graph/eulertour.cpp}
+
+\subsection{二分图匹配 | 最小边覆盖}
+\inputminted{cpp}{graph/bi_match.cpp}
+
+\subsection{网络最大流 | dinic}
+\inputminted{cpp}{graph/dinic.cpp}
+
+\subsection{最小费用流 | dijkstra}
+\inputminted{cpp}{graph/dijk-MCMF.cpp}
+
+\subsection{最小费用流 | spfa}
+\inputminted{cpp}{graph/spfa-MCMF.cpp}
+
+\subsection{二分图最大权匹配 | KM} % !!! pb
+\inputminted{cpp}{graph/KM.cpp}
+
+\subsection{一般图最大匹配 | 带花树}
+\inputminted{cpp}{graph/带花树.cpp}
+
+\subsection{最小树形图}
+抄罗大的，返回值是边的集合，如果没有最小树形图会返回 $-1$，可以修改建图。
+\inputminted{cpp}{graph/D-MST.cpp}
+
+\subsection{缩点 | kasaraju}
+时间复杂度 $O(\frac{n^2}{w})$, 可以对于边修改不多的图快速计算。
+\inputminted{cpp}{graph/kasaraju.cpp}
+
+\subsection{缩点 | Tarjan} % !!! pb
+\inputminted{cpp}{graph/tarjan.cpp}
+
+\subsection{缩点 | 点双} % !!! pb
+\inputminted{cpp}{graph/tarjan_vertex.cpp}
+
+\subsection{缩点 | 边双} % !!! pb
+\inputminted{cpp}{graph/tarjan_edge.cpp}
+
+\subsection{2-Sat}
+\inputminted{cpp}{graph/2-sat.cpp}
+
+\subsection{支配树}
+\inputminted{cpp}{graph/支配树.cpp}
+
+\subsection{三/四元环}
+\inputminted{cpp}{graph/34cycle.cpp}
+
+\subsection{Tree And Graph}
+\input{graph/TreeAndGraph.tex}
+
+\subsection{拟阵交}
+\input{graph/拟阵交.tex}
+
+
+
+\section{Math}	
+
+\subsection{万能欧几里得}
+\inputminted{cpp}{math/Euclid.cpp}
+
+\subsection{直线下点数|欧几里得}
+
+$n < 2 ^ {32}, 1 \leq m < 2 ^ {32}$
+
+$$
+result=\sum_{i=0}^{n-1} \lfloor \frac{ai + b}{m} \rfloor \pmod{2^{64}}
+$$
+
+\inputminted{cpp}{math/floor_sum.cpp}
+
+\subsection{扩展欧几里得}
+\inputminted{cpp}{math/exgcd.cpp}
+
+\subsection{扩展中国剩余定理}
+\inputminted{cpp}{math/exCRT.cpp}
+
+\subsection{拉格朗日反演}
+$$
+\begin{aligned}
+G(F(x))&=H(x)\Rightarrow [x^n]G(x)=\frac{1}{n}[u^{n-1}]H'(u)(\frac{u}{F(u)})^n\\
+G(F(x))&=x\Rightarrow [x^n]H(G(x))=\frac{1}{n}[u^{n-1}]H'(u)(\frac{u}{F(u)})^n\\
+G(F(x))&=x\Rightarrow [x^n]G^k(x)=\frac{k}{n}[u^{n-k}](\frac{u}{F(u)})^n
+\end{aligned}
+$$
+
+\subsection{Miller-Rabin}
+\inputminted{cpp}{math/Miller_Rabin.cpp}
+
+\subsection{Pollard-rho}
+\inputminted{cpp}{math/pollard_rho.cpp}
+
+\subsection{Fast Fourier Transform}
+\inputminted{cpp}{math/FFT.cpp}
+
+\subsection{Number Theoretic Transform}
+\inputminted{cpp}{math/NTT.cpp}
+
+\subsection{Generating function}
+\inputminted{cpp}{math/GF.cpp}
+
+\subsection{Berlekamp Massey}
+\inputminted{cpp}{math/BM.cpp}
+
+\subsection{线性规划 | 单纯形法}
+\inputminted{cpp}{math/LP.cpp}
+
+
+\section{字符串}
+\subsection{后缀自动机 | SAM}
+需要两倍点数量。
+\inputminted{cpp}{string/new-sam.cpp}
+
+\subsection{基本子串字典}
+\inputminted{cpp}{string/基本子串字典.cpp}
+
+\subsection{DAG 剖分}
+\inputminted{cpp}{string/dag剖.cpp}
+
+\subsection{exKMP}
+\inputminted{cpp}{string/exkmp.cpp}
+
+\subsection{log 个最小后缀}
+\inputminted{cpp}{string/log个最小后缀.cpp}
+
+\subsection{SA}
+\inputminted{cpp}{string/SA.cpp}
+
+\subsection{PAM}
+\inputminted{cpp}{string/new-pam.cpp}
+
+\subsection{AC 自动机}
+\inputminted{cpp}{string/AC自动机.cpp}
+
+\subsection{Manacher}
+\inputminted{cpp}{string/manacher.cpp}
+
+\subsection{Lyndon/最小表示法}
+\inputminted{cpp}{string/new_lyndon.cpp}
+
+\subsection{Runs}
+\inputminted{cpp}{string/run.cpp}
+
+\section{数据结构}
+\subsection{区间加区间求和 树状数组}
+\inputminted{cpp}{ds/ex-bit.cpp}
+
+\subsection{zkw 线段树}
+\inputminted{cpp}{ds/zkw-sgt.cpp}
+
+\subsection{Link Cut Tree}
+\inputminted{cpp}{ds/LCT.cpp}
+
+\subsection{FHQ Treap} % !!! pb
+\inputminted{cpp}{ds/fhq.cpp}
+
+\section{geometry}
+\subsection{向量}
+\inputminted{cpp}{geometry/向量.cpp}
+
+\subsection{直线半平面}
+\inputminted{cpp}{geometry/直线半平面.cpp}
+
+\subsection{半平面交}
+\inputminted{cpp}{geometry/半平面交.cpp}
+
+\subsection{线段}
+\inputminted{cpp}{geometry/线段.cpp}
+
+\subsection{多边形}
+\inputminted{cpp}{geometry/多边形.cpp}
+
+\subsection{图形求交}
+\inputminted{cpp}{geometry/图形交.cpp}
+
+\subsection{Graham 凸包}
+没有判断左下角重点。
+结果为逆时针。
+
+\inputminted{cpp}{geometry/凸包.cpp}
+\subsection{上凸壳}
+结果显然为顺时针。
+\inputminted{cpp}{geometry/上凸壳.cpp}
+
+\subsection{最小圆覆盖}
+\inputminted{cpp}{geometry/最小圆覆盖.cpp}
+
+\subsection{最近点对}
+\inputminted{cpp}{geometry/最近点对.cpp}
+
+\subsection{凸包直径}
+\inputminted{cpp}{geometry/凸包直径.cpp}
+
+\subsection{切凸包}
+\inputminted{cpp}{geometry/切凸包.cpp}
+
+\subsection{V 图}
+\inputminted{cpp}{geometry/voronoi.cpp}
+
+
+\section{Misc}
+\subsection{Pragma}
+\inputminted{cpp}{misc/pragma.cpp}
+
+\subsection{Barrett}
+\inputminted{cpp}{misc/Barrett.cpp}
+
+\subsection{LCS}
+\inputminted{cpp}{misc/lcs.cpp}
+
+\subsection{日期公式}
+\inputminted{cpp}{misc/zeller.cpp}
+
+\subsection{Xorshift}
+\inputminted{cpp}{misc/xorshift.cpp}
+
+\section{配置}
+
+\subsection{vimrc}
+\inputminted{cpp}{config/.vimrc}
+
+\subsection{bashrc}
+\inputminted{cpp}{config/.bashrc}
+
+\subsection{对拍}
+需要 chmod +x
+\inputminted{cpp}{config/1.sh}
+
+\subsection{bash 命令}
+\large \textbf{ulimit -s 1048576}
+
+\large \textbf{ulimit -m 1048576}
+\subsection{随机素数}
+964694273
+
+904107223
+
+909963049
+
+948201277
+
+919505287
+
+961168736121296987
+
+995053212556338707
+
+970317702351700811
+
+934455680461421593
+
+958760270131695697
+
+\newpage
+\newpage
+
+\onecolumn
+\begin{multicols}{3}
+\section{tables}
+\subsection{导数积分}
+\input{math/CalculusTable.tex}
+\input{math/IntegrationTable_NewMeta.tex}
+\end{multicols}
+
+
+\end{document}

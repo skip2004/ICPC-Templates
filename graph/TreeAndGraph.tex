@@ -1,0 +1,41 @@
+\subsubsection{树的计数 Prufer序列}
+    树和其prufer编码一一对应, 一颗$n$个点的树, 其prufer编码长度为${n-2}$, 且度数为$d_i$ 的点在prufer 编码中出现${d_i -1}$次. 
+    \par 由树得到序列: 总共需要$n-2$步, 第$i$步在当前的树中寻找具有最小标号的叶子节点, 将与其相连的点的标号设为Prufer序列的第$i$个元素$p_i$, 并将此叶子节点从树中删除, 直到最后得到一个长度为$n-2$的Prufer 序列和一个只有两个节点的树. 
+    \par 由序列得到树: 先将所有点的度赋初值为$1$, 然后加上它的编号在Prufer序列中出现的次数, 得到每个点的度; 执行$n-2$步, 第$i$步选取具有最小标号的度为$1$的点$u$与$v=p_i$ 相连, 得到树中的一条边, 并将$u$和$v$ 的度减一. 最后再把剩下的两个度为$1$的点连边, 加入到树中. 
+    \par 相关结论: $n$个点完全图, 每个点度数依次为$d_1$,$d_2$,...,$d_n$, 这样生成树的棵树为: ${\frac{(n-2)!}{(d_1-1)!(d_2-1)!...(d_n-1)!}}$.\\
+    左边有$n_1$个点, 右边有$n_2$个点的完全二分图的生成树棵树为$n_1^{n_2-1}\times n_2^{n_1-1}$. \\
+    $m$个连通块, 每个连通块有$c_i$个点, 把他们全部连通的生成树方案数: $(\sum c_i)^{m-2}\prod c_i$
+\subsubsection{有根树的计数}\noindent
+    首先, 令$S_{n,j}=\sum_{1\leq j\leq n/j}$; 于是$n+1$个结点的有根树的总数为$ a_{n+1}=\frac{\sum_{j=1}^nja_jS_{n-j}}{n}$. 注: $a_1=1,a_2=1,a_3=2,a_4=4,a_5=9,a_6=20,a_9=286,a_{11}=1842$. 
+\subsubsection{无根树的计数}\noindent
+    $n$是奇数时, 有$a_n-\sum_{i}^{n/2}a_ia_{n-i}$种不同的无根树. \\
+    $n$时偶数时, 有$a_n-\sum_{i}^{n/2}a_ia_{n-i}+\frac{1}{2}a_{n/2}(a_{n/2}+1)$种不同的无根树. 
+\subsubsection{生成树计数 Kirchhoff's Matrix-Tree Thoerem}
+    Kirchhoff Matrix $T=Deg-A$, $Deg$是度数对角阵, $A$是邻接矩阵. 无向图度数矩阵是每个点度数; 有向图度数矩阵是每个点入度.\\
+    邻接矩阵$A[u][v]$表示$u\rightarrow v$边个数, 重边按照边数计算, 自环不计入度数.\\
+    无向图生成树计数: $c=|K$的任意1个$n−1$阶主子式$|$\\
+    有向图外向树计数: $c=|$去掉根所在的那阶得到的主子式$|$
+\subsubsection{有向图欧拉回路计数 BEST Thoerem}
+    \[ \mathrm{ec}(G) = t_w(G)\prod_{v \in{V}}(\mathrm{deg}(v) - 1)! \]
+    其中$\mathrm{deg}$为入度(欧拉图中等于出度), $t_w(G)$为以$w$为根的外向树的个数. 相关计算参考生成树计数.\\
+    欧拉连通图中任意两点外向树个数相同: $\mathrm{t_v}(G) = \mathrm{t_w}(G)$.
+\subsubsection{Tutte Matrix}
+    Tutte matrix $A$ of a graph $G=(V,E)$ : 
+    \[A_{ij}=\left\{
+        \begin{aligned}
+            & x_{ij} & \text{if} \, (i,j)\in E \, \text{and}\, i<j \\
+            & -x_{ij} & \text{if}\, (i,j)\in E \, \text{and}\, i>j \\
+            & 0 & \text{otherwise}
+        \end{aligned}
+        \right.\]
+    where $x_{ij}$ are indeterminates. The determinant of this skew-symmetric matrix is then a polynomial (in the variables $x_{ij}$, $i<j$ ): this coincides with the square of the pfaffian of the matrix $A$ and is non-zero (as a polynomial) if and only if a perfect matching exists.
+\subsubsection{Edmonds Matrix}
+    Edmonds matrix $A$ of a balanced ($|U|=|V|$) bipartite graph $G=(U,V,E)$ : 
+    \[A_{ij}=\left\{
+        \begin{aligned}
+            & x_{ij} & (u_i,v_j)\in E\\
+            & 0 & (u_i,v_j)\notin E
+        \end{aligned}
+        \right.\]
+    where the $x_{ij}$ are indeterminates. $G$有完美匹配当且仅当关于$x_{ij}$的多项式$det(A_{ij})$不恒为$0$.
+    完美匹配的个数等于多项式中单项式的个数.
