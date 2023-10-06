@@ -18,7 +18,8 @@
 \subsubsection{有向图欧拉回路计数 BEST Thoerem}
     \[ \mathrm{ec}(G) = t_w(G)\prod_{v \in{V}}(\mathrm{deg}(v) - 1)! \]
     其中$\mathrm{deg}$为入度(欧拉图中等于出度), $t_w(G)$为以$w$为根的外向树的个数. 相关计算参考生成树计数.\\
-    欧拉连通图中任意两点外向树个数相同: $\mathrm{t_v}(G) = \mathrm{t_w}(G)$.
+    欧拉连通图中任意两点外向树个数相同: $\mathrm{t_v}(G) = \mathrm{t_w}(G)$. \\
+    以 $1$ 结尾的欧拉路径计数就是把 $\mathrm{deg}$ 视为出度，把 $\mathrm{deg}(1)$ 的贡献改为 $\mathrm{deg}(1)!$.
 \subsubsection{Tutte Matrix}
     Tutte matrix $A$ of a graph $G=(V,E)$ : 
     \[A_{ij}=\left\{
