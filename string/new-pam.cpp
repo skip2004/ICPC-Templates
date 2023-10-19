@@ -1,6 +1,7 @@
 namespace pam {
 	int ch[N][26], len[N], lk[N], rp, las, nd, top[N], d[N]; 
 	void init() { rp = 0, las = nd = 1, len[1] = -1, lk[0] = 1; }
+	// remember to set S[0] = * 
 	int jmp(int x) { while(S[rp - len[x] - 1] != S[rp]) x = lk[x]; return x; }
 	void ins(int c) {
 		++ rp; int p = jmp(las);
