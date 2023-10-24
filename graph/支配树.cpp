@@ -33,7 +33,8 @@ namespace BuildDAG {
 	int dfn[sz],id[sz],anc[sz],cnt;
 	void dfs(int x) {
 		id[dfn[x]=++cnt]=x;
-		for (int v:V[x]) if (!dfn[v]) BuildTree::V[x].PB(v),BuildTree::deg[v]++,anc[v]=x,dfs(v);
+		for (int v:V[x]) if (!dfn[v])
+			BuildTree::V[x].PB(v), BuildTree::deg[v]++, anc[v] = x, dfs(v);
 	}
 	int fa[sz],mn[sz];
 	int find(int x) {
@@ -56,7 +57,8 @@ namespace BuildDAG {
 				if (dfn[v]<dfn[x]) chkmin(cur,dfn[v]);
 				else find(v),chkmin(cur,mn[v]);
 			}
-			semi[x]=id[cur];mn[x]=cur;fa[x]=anc[x];BuildTree::V[semi[x]].PB(x);BuildTree::deg[x]++;
+			semi[x]=id[cur];mn[x]=cur;fa[x]=anc[x];
+			BuildTree::V[semi[x]].PB(x);BuildTree::deg[x]++;
 		}
 	}
 }

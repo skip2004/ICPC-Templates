@@ -10,12 +10,9 @@ std::vector<vec2> HPI(std::vector<line> vs) {
 	deq[0] = vs[0];
 	for(int i = 1;i <= n;++i) {
 		line o = i < n ? vs[i] : deq[ah];
-		if(paraS(vs[i - 1], o)) {
-			continue;
-		}
-		for(;ah < at && check(deq[at - 1], deq[at], o) < 0;) -- at; // maybe <=
-		if(i != n)
-			for(;ah < at && check(deq[ah], deq[ah + 1], o) < 0;) ++ ah;
+		if(paraS(vs[i - 1], o)) continue;
+		for(;ah < at && check(deq[at - 1], deq[at], o) < 0;) -- at;//maybe <=
+		if(i != n) for(;ah < at && check(deq[ah], deq[ah + 1], o) < 0;) ++ ah;
 		if(!is_para(o, deq[at])) {
 			ans[at] = o & deq[at];
 			deq[++at] = o;
@@ -24,4 +21,3 @@ std::vector<vec2> HPI(std::vector<line> vs) {
 	if(at - ah <= 2) return {};
 	return {ans.begin() + ah, ans.begin() + at};
 }
-

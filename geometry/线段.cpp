@@ -18,5 +18,5 @@ bool is_isc(const seg & x, const seg & y) {
 }
 db dist(const seg & x, const seg & y) {
 	if(is_isc(x, y)) return 0;
-	return std::min({ dist(y, x.x), dist(y, x.y), dist(x, y.x), dist(x, y.y), });
+	return std::min({dist(y, x.x), dist(y, x.y), dist(x, y.x), dist(x, y.y)});
 }

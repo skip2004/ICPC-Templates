@@ -1,6 +1,5 @@
 using db = long double;
 const db eps = 1e-10;
-
 db sgn(db x) { return x < -eps ? -1 : x > eps; }
 db eq(db x, db y) { return !sgn(x - y); }
 struct vec2 {
@@ -23,10 +22,8 @@ vec2 operator * (vec2 x, db y) { return {x.x * y, x.y * y}; }
 vec2 operator * (db y, vec2 x) { return {x.x * y, x.y * y}; }
 db operator * (vec2 x, vec2 y) { return x.x * y.y - x.y * y.x; }
 db operator % (vec2 x, vec2 y) { return x.x * y.x + x.y * y.y; }
-
-int half(vec2 x) { return x.y < 0 || (x.y == 0 && x.x <= 0); }
-int half(vec2 x) { return x.y < -eps || (std::fabs(x.y) < eps && x.x < eps); }
-
+int half(vec2 x){return x.y < 0 || (x.y == 0 && x.x <= 0); }
+int half(vec2 x){return x.y < -eps || (std::fabs(x.y) < eps && x.x < eps);}
 bool cmp(vec2 a, vec2 b) { return half(a) == half(b) ? a * b > 0 : half(b); }
 bool cmp_eq(vec2 A, vec2 B) { return half(A) == half(B) && eq(A * B, 0) ; }
 // 判断 A, B, C 三个向量是否是逆时针顺序
@@ -42,18 +39,10 @@ bool cmp_ct(vec2 A, vec2 B, vec2 C) {
 		return cmp(B, C) && cmp(C, A);
 	}
 }
-db cross(vec2 x, vec2 y, vec2 z) {
-	return (y.x - x.x) * (z.y - x.y) - (y.y - x.y) * (z.x - x.x);
-}
-
 // 凸包 DP
-struct pr { 
-	int i, j;
-	vec2 get() const { return a[j] - a[i]; }
-};
+struct pr { int i, j; vec2 get() const { return a[j] - a[i]; } };
 bool cmpseg(pr x, pr y) {
 	vec2 A = x.get(), B = y.get();
 	if(!cmp(A, B) && !cmp(B, A)) return a[x.i] % A < a[y.i] % A;
 	return cmp(A, B);
 }
-

@@ -22,7 +22,6 @@ std::vector<vec2> tang(circle o, vec2 x) {
 	if(d <= o.r + eps) return {};
 	return o & circle{x, sqrt(d * d - o.r * o.r)};
 }
-
 // 三角形 (0, a, b) 和圆 o 的交的有向面积 * 2
 db intersect(circle o, vec2 a, vec2 b) {
 	a = a - vec2(o), b = b - vec2(o); o.x = o.y = 0;

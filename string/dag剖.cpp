@@ -39,4 +39,3 @@ void build() {
 		if(fr[nx[i]] == i) son[i] = nx[i], vis[son[i]] = 1;
 	}
 }
-
