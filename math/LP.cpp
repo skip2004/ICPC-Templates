@@ -1,9 +1,6 @@
 using db = long double;
 const db eps = 1e-16;
-int sgn(db x) {
-	return x < -eps ? -1 : x > eps;
-}
-
+int sgn(db x) { return x < -eps ? -1 : x > eps; }
 namespace LP {
 	const int N = 21, M = 21;
 	int n, m; // n : 变量个数，m : 约束个数
