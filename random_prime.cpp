@@ -39,7 +39,7 @@ bool checkprime(ll p) {
 
 int main() {
 	std::ios::sync_with_stdio(false), cin.tie(0);
-	std::mt19937_64 gen(1145141919811);
+	std::mt19937_64 gen(114511293141919811);
 	for(int i = 0;i < 10;++i) {
 		ll x;
 		do {

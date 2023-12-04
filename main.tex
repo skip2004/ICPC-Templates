@@ -63,7 +63,7 @@
 \begin{document}
 \begin{titlepage}
 \maketitle
-\center{\fontsize{20.0pt}{\baselineskip}\selectfont 2023 CCPC 哈尔滨站}
+% \center{\fontsize{20.0pt}{\baselineskip}\selectfont 2023 CCPC 哈尔滨站}
 
 \thispagestyle{empty}
 \pagebreak
@@ -198,6 +198,16 @@ $$
 
 \subsection{线性规划 | 单纯形法}
 \inputminted{cpp}{math/LP.cpp}
+
+\subsection{Simpson 积分}
+
+$$
+\begin{aligned}
+	\int_a^b f(x) dx &\approx
+	\frac{b-a}{3n} (f(x_0) + 4 \sum_{i=1}^{n/2} f(x_{2i-1}) + 2 \sum_{i=1}^{n/2-1} f(x_{2i})+f(x_n)) \\
+	&\approx \frac{3(b-a)}{8n} (f(x_0) + 3 \sum_{i=1}^{n/3} (f(x_{3i-1}) + f(x_{3i-2})) + 2 \sum_{i=1}^{n/3-1} f(x_{3i})+f(x_n))
+\end{aligned}
+$$
 
 
 \section{字符串}
@@ -338,25 +348,27 @@ $$
 
 \large \textbf{ulimit -m 1048576}
 \subsection{随机素数}
-964694273
+908757331
 
-904107223
+958592069
 
-909963049
+994345279
 
-948201277
+956834423
 
-919505287
+979700993
 
-961168736121296987
+915372207358028653
 
-995053212556338707
+960052720131832583
 
-970317702351700811
+930631266224489987
 
-934455680461421593
+920421838677105979
 
-958760270131695697
+993648612853622357
+
+% \includegraphics[scale=0.7]{djq.jpg}
 
 \newpage
 

@@ -12,19 +12,19 @@ struct Dinic {
 	bool bfs(int s, int t) {
 		std::queue<int> Q;
 		for(int i = s;i <= t;++i) dis[i] = -1, head[i] = h[i]; //如果编号不是[S,T]，只要改这里
-		for(Q.push(s), dis[s] = 0;!Q.empty();) {
+		for(Q.push(t), dis[t] = 0;!Q.empty();) {
 			int x = Q.front(); Q.pop();
-			for(int i = h[x];i;i = e[i].nxt) if(e[i].v && dis[e[i].to] < 0) {
+			for(int i = h[x];i;i = e[i].nxt) if(e[i ^ 1].v && dis[e[i].to] < 0) {
 				dis[e[i].to] = dis[x] + 1, Q.push(e[i].to);
 			}
 		}
-		return dis[t] >= 0;
+		return dis[s] >= 0;
 	}
 	int dfs(int s, int t, int lim) {
 		if(s == t || !lim) return lim;
 		int ans = 0, mn;
 		for(int & i = head[s];i;i = e[i].nxt) {
-			if(dis[e[i].to] == dis[s] + 1 && (mn = dfs(e[i].to, t, std::min(lim, e[i].v)))) {
+			if(dis[e[i].to] + 1 == dis[s] && (mn = dfs(e[i].to, t, std::min(lim, e[i].v)))) {
 				e[i].v -= mn, e[i ^ 1].v += mn;
 				ans += mn, lim -= mn;
 				if(!lim) break;
