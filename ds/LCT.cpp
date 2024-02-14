@@ -1,5 +1,4 @@
 int son[N][2], fa[N], rev[N];
-
 int get(int x, int p = 1) { return son[fa[x]][p] == x; }
 void update(int x) { }
 int is_root(int x) { return !(get(x) || get(x, 0)); }

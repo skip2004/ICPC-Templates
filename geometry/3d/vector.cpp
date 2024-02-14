@@ -3,8 +3,8 @@ struct vec3 {
 	db norm() const { return x * x + y * y + z * z; }
 	db abs() const { return std::sqrt(norm()); }
 };
-vec3 operator + (vec3 x, vec3 y) { return {x.x + y.x, x.y + y.y, x.z + y.z}; }
-vec3 operator - (vec3 x, vec3 y) { return {x.x - y.x, x.y - y.y, x.z - y.z}; }
+vec3 operator + (vec3 x, vec3 y){ return {x.x + y.x, x.y + y.y, x.z + y.z}; }
+vec3 operator - (vec3 x, vec3 y){ return {x.x - y.x, x.y - y.y, x.z - y.z}; }
 vec3 operator * (vec3 x, db y) { return {x.x * y, x.y * y, x.z * y}; }
 vec3 operator / (vec3 x, db y) { return {x.x / y, x.y / y, x.z / y}; }
 vec3 operator * (vec3 x, vec3 y) { // 三维叉积需要更高的精度
