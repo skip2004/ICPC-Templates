@@ -42,4 +42,3 @@ void exp(int * a, int * b, int n) { // b = e^a (mod x^n)
 	IDFT(c);
 	memcpy(b + m, c + m, (n - m) << 2);
 }
-

@@ -10,10 +10,6 @@ struct BIT {
 		for(int i = p;i;i &= i - 1) res += (p + 1) * a[i] - b[i];
 		return res;
 	}
-	void add(int l, int r, int v) {
-		add(l, v), add(r + 1, -v);
-	}
-	ll qry(int l, int r) {
-		return qry(r) - qry(l - 1);
-	}
+	void add(int l, int r, int v) { add(l, v), add(r + 1, -v); }
+	ll qry(int l, int r) { return qry(r) - qry(l - 1); }
 } bit;
