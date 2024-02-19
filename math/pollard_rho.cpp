@@ -1,30 +1,15 @@
 ll rho(ll n) {
 	if(!(n & 1)) return 2;
 	static std::mt19937_64 gen((size_t)"hehezhou");
-	ll c = gen() % (n - 1) + 1, y = gen() % (n - 1) + 1;
-	auto f = [&](ll o) {
-		o = mul(o, o) + c;
-		return o >= n ? o - n : o;
-	};
-	setmod(p);
-	for(int l = 1;;l <<= 1) {
-		ll x = y, g = 1;
-		for(int i = 0;i < l;++i) y = f(y);
-		const int d = 512;
-		for(int i = 0;i < l;i += d) {
-			ll sy = y;
-			for(int j = 0;j < std::min(d, l - i);++j) {
-				y = f(y), g = mul(g, (y - x + n));
-			}
-			g = std::__gcd(n, g);
-			if(g == 1)
-				continue;
-			if(g == n)
-				for(g = 1, y = sy;g == 1;)
-					y = f(y), g = std::__gcd(n, y - x + n);
-			return g;
-		}
+	ll x = 0, y = 0, prod = 1;
+	auto f = [&](ll o) { return mul(o, o) + 1; };
+	setmod(n);
+	for(int t = 30, z = 0;t % 64 || std::gcd(prod, n) == 1;++t) {
+		if (x == y) x = ++ z, y = f(x);
+		if(ll q = mul(prod, x + n - y)) prod = q;
+		x = f(x), y = f(f(y));
 	}
+	return std::gcd(prod, n);
 }
 std::vector<ll> factor(ll x) {
 	std::queue<ll> q; q.push(x);
