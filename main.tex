@@ -144,14 +144,10 @@
 \input{graph/拟阵交.tex}
 
 
-
-\section{Math}	
-
+\section{数论}	
 \subsection{万能欧几里得}
 \inputminted{cpp}{math/Euclid.cpp}
-
 \subsection{直线下点数|欧几里得}
-
 $n < 2 ^ {32}, 1 \leq m < 2 ^ {32}$
 
 $$
@@ -166,6 +162,14 @@ $$
 \subsection{扩展中国剩余定理}
 \inputminted{cpp}{math/exCRT.cpp}
 
+\subsection{Miller-Rabin}
+\inputminted{cpp}{math/Miller_Rabin.cpp}
+
+\subsection{Pollard-rho}
+\inputminted{cpp}{math/pollard_rho.cpp}
+
+\section{Math}
+
 \subsection{拉格朗日反演}
 $$
 \begin{aligned}
@@ -174,12 +178,6 @@ G(F(x))&=x\Rightarrow [x^n]H(G(x))=\frac{1}{n}[u^{n-1}]H'(u)(\frac{u}{F(u)})^n\\
 G(F(x))&=x\Rightarrow [x^n]G^k(x)=\frac{k}{n}[u^{n-k}](\frac{u}{F(u)})^n
 \end{aligned}
 $$
-
-\subsection{Miller-Rabin}
-\inputminted{cpp}{math/Miller_Rabin.cpp}
-
-\subsection{Pollard-rho}
-\inputminted{cpp}{math/pollard_rho.cpp}
 
 \subsection{Fast Fourier Transform}
 \inputminted{cpp}{math/FFT.cpp}
@@ -205,6 +203,9 @@ $$
 	&\approx \frac{3(b-a)}{8n} (f(x_0) + 3 \sum_{i=1}^{n/3} (f(x_{3i-1}) + f(x_{3i-2})) + 2 \sum_{i=1}^{n/3-1} f(x_{3i})+f(x_n))
 \end{aligned}
 $$
+
+\subsection{黄金三分}
+\inputminted{cpp}{math/Goldensectionsearch.cpp}
 
 
 \section{字符串}
