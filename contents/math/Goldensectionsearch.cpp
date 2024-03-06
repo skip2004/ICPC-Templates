@@ -12,4 +12,4 @@ db findmax(db a, db c, auto f) {
 		}
 	}
 	return bv;
-}
+} // $\log_{1.618}(2) \approx 1.44$

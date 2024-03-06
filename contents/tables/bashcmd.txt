@@ -1,0 +1,2 @@
+ulimit -s 1048576
+ulimit -m 1048576

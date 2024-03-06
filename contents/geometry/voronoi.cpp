@@ -13,6 +13,7 @@ std::vector<line> cut(const std::vector<line> & o, line l) {
 	}
 	return res;
 } // 切凸包
+line bisector(vec2 a, vec2 b) { return line(a.x - b.x, a.y - b.y, (b.norm() - a.norm()) / 2); }
 std::vector<std::vector<line>> voronoi(std::vector<vec2> p) {
 	int n = p.size();
 	auto b = p; shuffle(b.begin(), b.end(), gen);
