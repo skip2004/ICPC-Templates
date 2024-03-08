@@ -1,0 +1,3 @@
+-D_GLIBCXX_DEBUG : STL debug mode
+-fsanitize=address : 内存错误检查
+-fsanitize=undefined : UB 检查

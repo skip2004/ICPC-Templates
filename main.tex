@@ -120,6 +120,9 @@
 \subsection{缩点 | 边双} % !!! pb
 \inputminted{cpp}{contents/graph/tarjan_edge.cpp}
 
+\subsection{仙人掌}
+\inputminted{cpp}{contents/graph/cactus.cpp}
+
 \subsection{2-Sat}
 \inputminted{cpp}{contents/graph/2-sat.cpp}
 
@@ -141,11 +144,14 @@
 
 \section{数论}	
 
+\subsection{取模还原分数}
+\inputminted{cpp}{contents/numbertheory/approx.cpp}
+
 \subsection{扩展欧几里得}
-\inputminted{cpp}{contents/math/exgcd.cpp}
+\inputminted{cpp}{contents/numbertheory/exgcd.cpp}
 
 \subsection{万能欧几里得}
-\inputminted{cpp}{contents/math/Euclid.cpp}
+\inputminted{cpp}{contents/numbertheory/Euclid.cpp}
 
 \subsection{直线下点数|欧几里得}
 $n < 2 ^ {32}, 1 \leq m < 2 ^ {32}$
@@ -154,20 +160,20 @@ $$
 result=\sum_{i=0}^{n-1} \lfloor \frac{ai + b}{m} \rfloor \pmod{2^{63}}
 $$
 
-\inputminted{cpp}{contents/math/floor_sum.cpp}
+\inputminted{cpp}{contents/numbertheory/floor_sum.cpp}
 
 \subsection{Stern-Brocot Tree 二分}
 
-\inputminted{cpp}{contents/math/sbt.cpp}
+\inputminted{cpp}{contents/numbertheory/sbt.cpp}
 
 \subsection{扩展中国剩余定理}
-\inputminted{cpp}{contents/math/exCRT.cpp}
+\inputminted{cpp}{contents/numbertheory/exCRT.cpp}
 
 \subsection{Miller-Rabin}
-\inputminted{cpp}{contents/math/Miller_Rabin.cpp}
+\inputminted{cpp}{contents/numbertheory/Miller_Rabin.cpp}
 
 \subsection{Pollard-rho}
-\inputminted{cpp}{contents/math/pollard_rho.cpp}
+\inputminted{cpp}{contents/numbertheory/pollard_rho.cpp}
 
 \section{Math}
 
@@ -331,6 +337,8 @@ $$
 \subsection{Xorshift}
 \inputminted{cpp}{contents/misc/xorshift.cpp}
 
+\newpage
+
 \section{配置}
 
 \subsection{vimrc}
@@ -343,14 +351,15 @@ $$
 需要 chmod +x
 \inputminted{cpp}{contents/config/1.sh}
 
-\subsection{bash 命令}
-\inputminted{text}{contents/tables/bashcmd.txt}
+\subsection{编译参数}
+\inputminted{text}{contents/tables/options.txt}
 
 \subsection{随机素数}
 \inputminted{text}{contents/tables/primes.txt}
 
 \onecolumn
 \newpage
+
 \begin{multicols}{3}
 \section{tables}
 \subsection{导数积分}
