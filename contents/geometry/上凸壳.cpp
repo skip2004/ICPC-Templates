@@ -1,13 +1,13 @@
-std::vector<vec2> gethull(std::vector<vec2> o) {
-	sort(o.begin(), o.end(), [](vec2 x, vec2 y) {
+std::vector<p2> gethull(std::vector<p2> o) {
+	sort(o.begin(), o.end(), [](p2 x, p2 y) {
 		if(x.x == y.x) {
 			return x.y > y.y; // gt => lt
 		} else {
 			return x.x < y.x;
 		}
 	});
-	std::vector<vec2> stack;
-	for(vec2 x : o) {
+	std::vector<p2> stack;
+	for(p2 x : o) {
 		if(stack.size() && stack.back().x == x.x) {
 			continue;
 		}

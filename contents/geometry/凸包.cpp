@@ -1,7 +1,7 @@
-db cross(vec2 x, vec2 y, vec2 z) { return (y.x - x.x) * (z.y - x.y) - (y.y - x.y) * (z.x - x.x); }
-std::vector<vec2> gethull(std::vector<vec2> o) { 
-	sort(o.begin(), o.end(), [](vec2 x, vec2 y) { return eq(x.x, y.x) ? x.y < y.y : x.x < y.x; });
-	std::vector<vec2> stack;
+db cross(p2 x, p2 y, p2 z) { return (y.x - x.x) * (z.y - x.y) - (y.y - x.y) * (z.x - x.x); }
+std::vector<p2> gethull(std::vector<p2> o) { 
+	sort(o.begin(), o.end(), [](p2 x, p2 y) { return eq(x.x, y.x) ? x.y < y.y : x.x < y.x; });
+	std::vector<p2> stack;
 	for(int i = 0;i < (int) o.size();++i) {
 		for(;stack.size() >= 2 && cross(stack.rbegin()[1], stack.back(), o[i]) <= eps;) {
 			stack.pop_back();
@@ -17,7 +17,7 @@ std::vector<vec2> gethull(std::vector<vec2> o) {
 	stack.pop_back();
 	return stack;
 } // 把两个 eps 改成 -eps 可求出所有在凸包上的点
-int findmax(vec2 d, const std::vector<vec2> & a) {
+int findmax(p2 d, const std::vector<p2> & a) {
 	int l = 0, r = a.size() - 1;
 	if(a[0] % d > a.back() % d) {
 		for(;l + 1 < r;) {

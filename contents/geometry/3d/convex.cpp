@@ -2,7 +2,7 @@ const int N = 2005;
 struct face { int a[3]; plane p; };
 int vis[N][N];
 std::vector<face> f;
-void convex3d(const std::vector<vec3> & a) { // need to deal coplane 
+void convex3d(const std::vector<p3> & a) { // need to deal coplane 
 	if(a.size() < 3) return ;
 	auto getface = [&](int i, int j, int k) -> face { return {{i, j, k}, plane(a[i], a[j], a[k])}; };
 	f = {getface(0, 1, 2), getface(0, 2, 1)};

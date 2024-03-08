@@ -1,12 +1,12 @@
-std::vector<vec2> HPI(std::vector<line> vs) {
+std::vector<p2> HPI(std::vector<line> vs) {
 	auto cmp = [](line a, line b) {
 		if(paraS(a, b)) return dist(a) < dist(b);
-		return ::cmp(vec2(a), vec2(b));
+		return ::cmp(p2(a), p2(b));
 	};
 	sort(vs.begin(), vs.end(), cmp);
 	int ah = 0, at = 0, n = size(vs);
 	std::vector<line> deq(n + 1);
-	std::vector<vec2> ans(n);
+	std::vector<p2> ans(n);
 	deq[0] = vs[0];
 	for(int i = 1;i <= n;++i) {
 		line o = i < n ? vs[i] : deq[ah];

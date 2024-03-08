@@ -38,17 +38,17 @@ bool checkprime(ll p) {
 }
 
 int main() {
-	std::ios::sync_with_stdio(false), cin.tie(0);
-	std::mt19937_64 gen(114511293141919811);
+	freopen("primes.txt", "w", stdout);
+	std::mt19937_64 gen(std::chrono::high_resolution_clock::now().time_since_epoch().count());
 	for(int i = 0;i < 10;++i) {
 		ll x;
 		do {
-			if(i < 5) {
-				x = gen() % (ll) 1e8 + (ll)9e8;
-			} else {
+			if(i % 2) {
 				x = gen() % (ll) 1e17 + (ll)9e17;
+			} else {
+				x = gen() % (ll) 1e8 + (ll)9e8;
 			}
 		} while(!checkprime(x));
-		cout << x << "\n\n";
+		cout << x << " \n"[i % 2 == 1];
 	}
 }

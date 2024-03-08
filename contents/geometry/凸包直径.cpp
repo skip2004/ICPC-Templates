@@ -1,4 +1,4 @@
-db convex_diameter(std::vector<vec2> & o) {
+db convex_diameter(std::vector<p2> & o) {
 	int n = size(o);
 	db max = 0;
 	for(int i = 0, j = 0;i < n;++i) {

@@ -6,39 +6,39 @@ using i128 = __int128;
 using Q = struct Quad*;
 using db = double;
 
-struct vec2 {
+struct p2 {
 	int x, y;
 	ll norm() const { return (ll) x * x + (ll) y * y; }
 	db dist() const { return sqrt(norm()); }
 };
-vec2 operator + (vec2 x, vec2 y) { return {x.x + y.x, x.y + y.y}; }
-vec2 operator - (vec2 x, vec2 y) { return {x.x - y.x, x.y - y.y}; }
-ll operator * (vec2 x, vec2 y) { return (ll) x.x * y.y - (ll) x.y * y.x; }
-bool operator == (const vec2 & x, const vec2 & y) {
+p2 operator + (p2 x, p2 y) { return {x.x + y.x, x.y + y.y}; }
+p2 operator - (p2 x, p2 y) { return {x.x - y.x, x.y - y.y}; }
+ll operator * (p2 x, p2 y) { return (ll) x.x * y.y - (ll) x.y * y.x; }
+bool operator == (const p2 & x, const p2 & y) {
 	return x.x == y.x && x.y == y.y;
 }
-bool operator < (const vec2 & x, const vec2 & y) {
+bool operator < (const p2 & x, const p2 & y) {
 	if(x.x != y.x) return x.x < y.x;
 	return x.y < y.y;
 }
 
-vec2 arb(LLONG_MAX, LLONG_MAX);
+p2 arb(LLONG_MAX, LLONG_MAX);
 struct Quad {
-	Q rot, o; vec2 p = arb; bool mark;
-	vec2& F() { return r() -> p; }
+	Q rot, o; p2 p = arb; bool mark;
+	p2& F() { return r() -> p; }
 	Q& r() { return rot->rot; }
 	Q prev() { return rot->o->rot; }
 	Q next() { return r()->prev(); }
 } *H;
-ll cross(vec2 a, vec2 b, vec2 c) {
+ll cross(p2 a, p2 b, p2 c) {
 	return (b - a) * (c - a);
 }
-bool circ(vec2 p, vec2 a, vec2 b, vec2 c) { // p 是否在 a, b, c 外接圆中
+bool circ(p2 p, p2 a, p2 b, p2 c) { // p 是否在 a, b, c 外接圆中
 	i128 p2 = p.norm(), A = a.norm() - p2, B = b.norm() - p2, C = c.norm() - p2;
 	a = a - p, b = b - p, c = c - p;
 	return (a * b) * C + (b * c) * A + (c * a) * B > 0;
 }
-Q link(vec2 orig, vec2 dest) {
+Q link(p2 orig, p2 dest) {
 	Q r = H ? H : new Quad{new Quad{new Quad{new Quad{0}}}};
 	H = r -> o; r -> r() -> r() = r;
 	for(int i = 0;i < 4;++i)
@@ -56,7 +56,7 @@ Q conn(Q a, Q b) {
 	splice(q -> r(), b);
 	return q;
 }
-std::pair<Q, Q> rec(const std::vector<vec2> & s) {
+std::pair<Q, Q> rec(const std::vector<p2> & s) {
 	int N = size(s);
 	if(N <= 3) {
 		Q a = link(s[0], s[1]), b = link(s[1], s.back());
@@ -94,7 +94,7 @@ std::pair<Q, Q> rec(const std::vector<vec2> & s) {
 	}
 	return {ra, rb};
 }
-std::vector<vec2> triangulate(std::vector<vec2> a) {
+std::vector<p2> triangulate(std::vector<p2> a) {
 	sort(a.begin(), a.end()); // unique
 	if((int)size(a) < 2) return {};
 	Q e = rec(a).first;
@@ -112,7 +112,7 @@ void dela(A& v, F f) {
 	auto ret = triangulate(v);
 	int N = size(ret);
 	assert(N % 3 == 0);
-	std::map<vec2, int> lut;
+	std::map<p2, int> lut;
 	for(int i = 0;i < (int) v.size();++i)
 		lut[v[i]] = i;
 	for (int a = 0; a < (int) size(ret); a += 3) {
@@ -125,7 +125,7 @@ int main() {
 	for(int i = 0;i < 500000;++i) {
 		{
 			// if (it % 200 == 0) cerr << endl;
-			std::vector<vec2> ps;
+			std::vector<p2> ps;
 			int N = gen() % 50 + 1;
 			int xrange = gen() % 100 + 1;
 			int yrange = gen() % 100 + 1;
@@ -183,9 +183,9 @@ int main() {
 			} else {
 				assert(!any);
 			}
-			auto convexHull = [&](std::vector<vec2> o) { 
-				sort(o.begin(), o.end(), [](vec2 x, vec2 y) { return x.x == y.x ? x.y < y.y : x.x < y.x; });
-				std::vector<vec2> stack;
+			auto convexHull = [&](std::vector<p2> o) { 
+				sort(o.begin(), o.end(), [](p2 x, p2 y) { return x.x == y.x ? x.y < y.y : x.x < y.x; });
+				std::vector<p2> stack;
 				for(int i = 0;i < (int) o.size();++i) {
 					for(;stack.size() >= 2 && cross(stack.rbegin()[1], stack.back(), o[i]) <= 0;) {
 						stack.pop_back();
@@ -202,7 +202,7 @@ int main() {
 				return stack;
 			};
 
-			std::vector<vec2> hull = convexHull(ps);
+			std::vector<p2> hull = convexHull(ps);
 			ll ar2 = 0;
 			for(int i = 2;i < (int) hull.size();++i) {
 				ar2 += cross(hull[0], hull[i - 1], hull[i]);

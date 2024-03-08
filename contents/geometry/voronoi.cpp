@@ -13,8 +13,8 @@ std::vector<line> cut(const std::vector<line> & o, line l) {
 	}
 	return res;
 } // 切凸包
-line bisector(vec2 a, vec2 b) { return line(a.x - b.x, a.y - b.y, (b.norm() - a.norm()) / 2); }
-std::vector<std::vector<line>> voronoi(std::vector<vec2> p) {
+line bisector(p2 a, p2 b) { return line(a.x - b.x, a.y - b.y, (b.norm() - a.norm()) / 2); }
+std::vector<std::vector<line>> voronoi(std::vector<p2> p) {
 	int n = p.size();
 	auto b = p; shuffle(b.begin(), b.end(), gen);
 	const db V = 1e5; // 边框大小，重要
@@ -23,7 +23,7 @@ std::vector<std::vector<line>> voronoi(std::vector<vec2> p) {
 		{-V, 0, V * V}, {0, -V, V * V},
 	});
 	for(int i = 0;i < n;++i) {
-		for(vec2 x : b) if((x - p[i]).abs() > eps) {
+		for(p2 x : b) if((x - p[i]).abs() > eps) {
 			a[i] = cut(a[i], bisector(p[i], x));
 		}
 	}

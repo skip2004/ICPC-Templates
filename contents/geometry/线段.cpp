@@ -1,12 +1,12 @@
 struct seg {
-	vec2 x, y;
+	p2 x, y;
 	seg() {}
-	seg(const vec2 & A, const vec2 & B) : x(A), y(B) {}
-	bool onseg(const vec2 & o) const {
+	seg(const p2 & A, const p2 & B) : x(A), y(B) {}
+	bool onseg(const p2 & o) const {
 		return (o - x) % (o - y) < eps && std::fabs((o - x) * (o - y)) < eps;
 	}
 };
-db dist(const seg & o, const vec2 & x) {
+db dist(const seg & o, const p2 & x) {
 	if((o.x - o.y) % (x - o.y) <= eps) return (x - o.y).abs();
 	if((o.y - o.x) % (x - o.x) <= eps) return (x - o.x).abs();
 	return fabs((o.x - x) * (o.y - x) / (o.x - o.y).abs());

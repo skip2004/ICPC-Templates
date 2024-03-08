@@ -1,22 +1,22 @@
 using i128 = __int128;
 using Q = struct Quad*;
-vec2 arb(LLONG_MAX, LLONG_MAX);
+p2 arb(LLONG_MAX, LLONG_MAX);
 struct Quad {
-	Q rot, o; vec2 p = arb; bool mark;
-	vec2& F() { return r() -> p; }
+	Q rot, o; p2 p = arb; bool mark;
+	p2& F() { return r() -> p; }
 	Q& r() { return rot->rot; }
 	Q prev() { return rot->o->rot; }
 	Q next() { return r()->prev(); }
 } *H;
-ll cross(vec2 a, vec2 b, vec2 c) {
+ll cross(p2 a, p2 b, p2 c) {
 	return (b - a) * (c - a);
 }
-bool circ(vec2 p, vec2 a, vec2 b, vec2 c) { // p 是否在 a, b, c 外接圆中
+bool circ(p2 p, p2 a, p2 b, p2 c) { // p 是否在 a, b, c 外接圆中
 	i128 p2 = p.norm(), A = a.norm() - p2, B = b.norm() - p2, C = c.norm() - p2;
 	a = a - p, b = b - p, c = c - p;
 	return (a * b) * C + (b * c) * A + (c * a) * B > 0;
 }
-Q link(vec2 orig, vec2 dest) {
+Q link(p2 orig, p2 dest) {
 	Q r = H ? H : new Quad{new Quad{new Quad{new Quad{0}}}};
 	H = r -> o; r -> r() -> r() = r;
 	for(int i = 0;i < 4;++i)
@@ -34,7 +34,7 @@ Q conn(Q a, Q b) {
 	splice(q -> r(), b);
 	return q;
 }
-std::pair<Q, Q> rec(const std::vector<vec2> & s) {
+std::pair<Q, Q> rec(const std::vector<p2> & s) {
 	int N = size(s);
 	if(N <= 3) {
 		Q a = link(s[0], s[1]), b = link(s[1], s.back());
@@ -72,7 +72,7 @@ std::pair<Q, Q> rec(const std::vector<vec2> & s) {
 	}
 	return {ra, rb};
 }
-std::vector<vec2> triangulate(std::vector<vec2> a) {
+std::vector<p2> triangulate(std::vector<p2> a) {
 	sort(a.begin(), a.end()); // unique
 	if((int)size(a) < 2) return {};
 	Q e = rec(a).first;
