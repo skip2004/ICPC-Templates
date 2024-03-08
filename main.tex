@@ -4,8 +4,24 @@
 \usepackage[libertine,vvarbb]{newtxmath}
 \usepackage[scr=rsfso]{mathalfa}
 \usepackage[T1]{fontenc} % best for Western European languages
-\usepackage{minted, listings, color, setspace, titlesec, fancyhdr, mdframed, multicol, relsize, xeCJK}
+\usepackage{minted}
+\usepackage{listings, color, setspace, titlesec, fancyhdr, mdframed, multicol}
+\usepackage{ucharclasses}
+\usepackage{xunicode, xltxtra}
 \usepackage[inner=1.35cm, outer=0.9cm, top=1.2cm, bottom=1.2cm]{geometry}
+\usepackage{pdfpages}
+\usepackage{tocloft}
+\usepackage{nameref}
+\usepackage{verbatim}
+\usepackage{relsize}
+\usepackage{fontspec}
+\usepackage[colorlinks, linkcolor = black]{hyperref}
+\usepackage[table]{xcolor}
+\usepackage{tabularx}
+\usepackage{xeCJK}
+% configure fonts
+
+
 \setCJKmainfont{SimHei}[Scale=0.8]
 \setCJKmonofont{SimHei}[Scale=0.8]
 \setCJKsansfont{KaiTi}[Scale=0.8]
@@ -21,7 +37,7 @@
 
 
 \setminted[cpp]{
-	style=xcode,
+	style=myxcode,
 	mathescape,
 	linenos,
 	autogobble,
