@@ -74,8 +74,8 @@
     \rfoot{\Huge \thepage}
 
 \setcounter{tocdepth}{3}
-		\let\cleardoublepage\relax
-		\let\clearpage\relax
+		%\let\cleardoublepage\relax
+		%\let\clearpage\relax
 		\begin{small}
 		\begin{spacing}{0.75}
 		\tableofcontents
@@ -104,7 +104,7 @@
 \inputminted{cpp}{contents/graph/带花树.cpp}
 
 \subsection{最小树形图}
-抄罗大的，返回值是边的集合，如果没有最小树形图会返回 $-1$，可以修改建图。
+抄罗大的，返回值是边的集合，如果没有最小树形图会返回空集（注意 $n=1$)，可以修改建图。
 \inputminted{cpp}{contents/graph/D-MST.cpp}
 
 \subsection{缩点 | kasaraju}
@@ -193,7 +193,10 @@ $$
 \inputminted{cpp}{contents/math/NTT.cpp}
 
 \subsection{Generating function}
-\inputminted{cpp}{contents/math/GF.cpp}
+\inputminted{cpp}{contents/math/GF_noExp.cpp}
+
+\subsection{全在线卷积}
+\inputminted{cpp}{contents/math/online_convolution.cpp}
 
 \subsection{Berlekamp Massey}
 \inputminted{cpp}{contents/math/BM.cpp}
@@ -336,8 +339,6 @@ $$
 
 \subsection{Xorshift}
 \inputminted{cpp}{contents/misc/xorshift.cpp}
-
-\newpage
 
 \section{配置}
 

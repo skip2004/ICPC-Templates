@@ -12,18 +12,13 @@ ll rho(ll n) {
 	return std::gcd(prod, n);
 }
 std::vector<ll> factor(ll x) {
-	std::queue<ll> q; q.push(x);
 	std::vector<ll> res;
-	for(;q.size();) {
-		ll x = q.front(); q.pop();
-		if(x == 1) continue;
-		if(checkprime(x)) {
-			res.push_back(x);
-			continue;
-		}
+	auto f = [&](auto f, ll x) {
+		if(x == 1) return ;
+		if(checkprime(x)) return res.push_back(x);
 		ll y = rho(x);
-		q.push(y), q.push(x / y);
-	}
-	sort(res.begin(), res.end());
+		f(f, y), f(f, x / y);
+	};
+	f(f, x), sort(res.begin(), res.end());
 	return res;
 }
