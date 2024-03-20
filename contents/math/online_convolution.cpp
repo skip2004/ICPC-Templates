@@ -27,20 +27,29 @@ struct oc {
 	}
 };
 struct Exp : oc {
-	std::vector<int> ans;
-	Exp(int n) : oc(n), ans(n) { }
-	void push(int v) {
-		if(!ans[0]) return void(ans[0] = 1);
-		oc::push(ans[p], v * u64(p + 1) % mod);
-		ans[p] = (u64) res[p - 1] * inv[p] % mod;
-	}
+    std::vector<int> res;
+    Exp(int n) : oc(n), res(n) { }
+    void push(int v) {
+        if(!res[0]) return void(res[0] = 1);
+        oc::push(res[p], v * u64(p + 1) % mod);
+        res[p] = (u64) oc::res[p - 1] * inv[p] % mod;
+    }
 };
 struct Ln : oc {
-	std::vector<int> ans; int fi;
-	Ln(int n) : oc(n), ans(n), fi(0) {}
-	void push(int v) {
-		if(!fi) return void(fi = 1);
-		oc::push(ans[p] * (u64) p % mod, v);
-		ans[p] = ((u64) v * p + mod - res[p - 1]) % mod * inv[p] % mod;
-	}
+    std::vector<int> res; int fi;
+    Ln(int n) : oc(n), res(n), fi(0) {}
+    void push(int v) {
+        if(!fi) return void(fi = 1);
+        oc::push(res[p] * (u64) p % mod, v);
+        res[p] = ((u64) v * p + mod - oc::res[p - 1]) % mod * inv[p] % mod;
+    }
 };
+struct Inv : oc {
+    std::vector<int> res; int fi;
+    Inv(int n) : oc(n), res(n), fi(0) {}
+    void push(int v) {
+		res[p] = fi ? (oc::res[p] + (u64) v * res[0]) % mod * (mod - res[0]) % mod : pow(fi = v, mod - 2);
+        oc::push(res[p], v);
+    }
+};
+
