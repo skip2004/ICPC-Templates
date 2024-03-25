@@ -52,4 +52,3 @@ struct Inv : oc {
         oc::push(res[p], v);
     }
 };
-

@@ -4,7 +4,7 @@ std::vector<p2> operator & (circle o, line l) {
 	db d = l(p2(o)) / L, x = o.r * o.r - d * d;
 	if(x < -eps) return {};
 	x = std::sqrt(x * sgn(x));
-	p2 z = p2(o) - d / L * v, p = Rv * (x / L);
+	p2 z = p2(o) - v * (d / L), p = Rv * (x / L);
 	return {z + p, z - p};
 } // l 如果是构造函数给出，那么返回交点按射线顺序
 std::vector<p2> operator & (circle o, seg s) {
@@ -14,7 +14,7 @@ std::vector<p2> operator & (circle o, seg s) {
 	return b;
 }
 std::vector<p2> operator & (circle o0, circle o1) {
-	p2 tmp = 2 * (p2(o1) - p2(o0));
+	p2 tmp = (p2(o1) - p2(o0)) * 2.;
 	return o0 & line(tmp.x, tmp.y, o1.r * o1.r - o0.r * o0.r + o0.norm() - o1.norm());
 }
 std::vector<p2> tang(circle o, p2 x) {
