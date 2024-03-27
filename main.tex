@@ -19,6 +19,12 @@
 \usepackage[table]{xcolor}
 \usepackage{tabularx}
 \usepackage{xeCJK}
+
+\usepackage{accsupp}
+\newcommand\emptyaccsupp[1]{\BeginAccSupp{ActualText={}}#1\EndAccSupp{}}
+%default definition is: \def\theFancyVerbLine{\rmfamily\tiny\arabic{FancyVerbLine}}
+\let\theHFancyVerbLine\theFancyVerbLine% don't apply our patch to hyperref's version
+\def\theFancyVerbLine{\rmfamily\tiny\emptyaccsupp{\arabic{FancyVerbLine}}}
 % configure fonts
 
 
@@ -48,7 +54,6 @@
 	baselinestretch=0.8,
 	tabsize=3,
 	fontsize=\normalsize,
-	%fontsize=\small,
 	frame=single,
 	framesep=1mm,
 	framerule=0.3pt,
@@ -100,7 +105,6 @@
 		\end{spacing}
 		\end{small}
 
-	
 \section{图论}
 
 \subsection{欧拉回路} % !!! pb
@@ -203,6 +207,11 @@ G(F(x))&=x\Rightarrow [x^n]H(G(x))=\frac{1}{n}[u^{n-1}]H'(u)(\frac{u}{F(u)})^n\\
 G(F(x))&=x\Rightarrow [x^n]G^k(x)=\frac{k}{n}[u^{n-k}](\frac{u}{F(u)})^n
 \end{aligned}
 $$
+\subsection{分拆数|五边形数}
+$$
+\prod_{i \ge 1} (1 - x ^ i)= \sum_{k = -\infty} ^ {\infty} (-1) ^ k x ^ {\frac{k(3k-1)}{2}}
+$$
+
 
 \subsection{Fast Fourier Transform}
 \inputminted{cpp}{contents/math/FFT.cpp}
@@ -378,6 +387,9 @@ $$
 
 \subsection{随机素数}
 \inputminted{text}{contents/tables/primes.txt}
+
+\subsection{常数表}
+\input{contents/tables/Addon.tex}
 
 \onecolumn
 \newpage

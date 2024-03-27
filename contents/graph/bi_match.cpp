@@ -16,7 +16,7 @@ std::vector<int> match(int nl, int nr) {
 // 最小边覆盖
 std::pair<std::vector<int>, std::vector<int>> minedgecover(int nl, int nr) {
 	std::vector<int> vis(nr + 1), match(nr + 1), ret(nl + 1);
-	for(int i = 1;i <= nl;++i) if(dfs(i, vis, match)) 
+	for(int i = 1;i <= nl;++i) if(dfs(i, vis, match))
 		memset(vis.data(), 0, vis.size() << 2);
 	for(int i = 1;i <= nr;++i) ret[match[i]] = i;
 	ret[0] = 0;
