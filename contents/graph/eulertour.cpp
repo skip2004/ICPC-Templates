@@ -1,8 +1,10 @@
-// 无向
-	for (int &i=head[x],tmp;(tmp=i);i=edge[i].nxt)
-if (!del[i>>1])
-	del[i>>1]=1,dfs(v),ans[++tp]=((tmp&1)?-1:1)*(tmp>>1);
-	// 有向
-	for (int &i=head[x],tmp;(tmp=i);i=edge[i].nxt)
-if (!del[i])
-	del[i]=1,dfs(v),ans[++tp]=tmp;
+vector<pii>V[sz];
+vector<int>ans; // reverse ans in the end
+void dfs(int x) {
+    static int vis[sz];
+    while (V[x].size()) {
+        auto [to,id]=V[x].back();
+        V[x].pop_back();
+        if (!vis[id]) vis[id]=1,dfs(to),ans.push_back(id);
+    }
+}
