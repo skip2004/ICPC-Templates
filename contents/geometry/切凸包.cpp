@@ -6,5 +6,6 @@ std::vector<p2> cut(const std::vector<p2> & o, line l) {
 		if(sgn(l(a)) >= 0) res.push_back(a); // 注意 sgn 精度
 		if(sgn(l(a)) * sgn(l(b)) < 0) res.push_back(line(a, b) & l);
 	}
+	if(res.size() <= 2) return {};
 	return res;
 } // 切凸包

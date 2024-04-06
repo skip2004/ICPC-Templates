@@ -11,6 +11,7 @@ std::vector<line> cut(const std::vector<line> & o, line l) {
 			res.push_back(l);
 		}
 	}
+	if(res.size() <= 2) return {};
 	return res;
 } // 切凸包
 line bisector(p2 a, p2 b) { return line(a.x - b.x, a.y - b.y, (b.norm() - a.norm()) / 2); }
