@@ -14,7 +14,7 @@ namespace mcmf {
 	int vis[N], fr[N];
 	bool spfa(int s, int t) {
 		std::queue<int> Q;
-		std::fill(d + s, d + t + 1, 1e18);
+		std::fill(d + s, d + t + 1, 1e18); // CHECK
 		for(d[s] = 0, Q.push(s);!Q.empty();) {
 			int x = Q.front(); Q.pop(); vis[x] = 0;
 			for(int i = h[x];i;i = e[i].nxt)
@@ -28,7 +28,7 @@ namespace mcmf {
 	}
 	bool dijkstra(int s, int t) { // 正常题目不需要 dijk
 		std::priority_queue<pr, std::vector<pr>, std::greater<pr>> Q;
-		for(int i = s;i <= t;++i) dis[i] = d[i], d[i] = 1e18, vis[i] = 0;
+		for(int i = s;i <= t;++i) dis[i] = d[i], d[i] = 1e18, vis[i] = fr[i] = 0; // CHECK
 		for(Q.emplace(d[s] = 0, s);!Q.empty();) {
 			int x = Q.top().second; Q.pop();
 			if(vis[x]) continue;
@@ -41,7 +41,7 @@ namespace mcmf {
 				}
 			}
 		}
-		for(int i = s;i <= t;++i) d[i] += dis[i];
+		for(int i = s;i <= t;++i) d[i] += dis[i]; // CHECK
 		return d[t] < 1e17;
 	}
 	std::pair<ll, ll> EK(int s, int t) {
@@ -56,3 +56,5 @@ namespace mcmf {
 		return std::make_pair(f, c);
 	}
 }
+// in flow problems with lower bounds (or with negative cycles), flow the negative edges first
+// after the first round, revert the auxiliary edges
