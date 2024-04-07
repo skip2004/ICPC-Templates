@@ -21,8 +21,8 @@ p3 closestOnL1(line3 l1, line3 l2) {
 	p3 n2 = l2.d * (l1.d * l2.d);
 	return l1.o + l1.d * ((l2.o - l1.o) % n2) / (l1.d % n2);
 }
-bool ispara(plane p1, plane p2){return(p1.n * p2.n).abs() < eps;}//判断是否相交
-bool ispara(line3 p1, line3 p2){return(p1.d * p2.d).abs() < eps;}//判断是否相交
+bool ispara(plane p1, plane p2){return(p1.n * p2.n).abs() < eps;}//判断是否平行
+bool ispara(line3 p1, line3 p2){return(p1.d * p2.d).abs() < eps;}//判断是否平行
 bool isperp(plane p1, plane p2){return fabs(p1.n % p2.n) < eps;}//判断是否垂直
 bool isperp(line3 p1, line3 p2){return fabs(p1.d % p2.d) < eps;}//判断是否垂直
 line3 perpthrough(plane p, p3 o){return line3(o, o + p.n);}//过平面一点做垂线

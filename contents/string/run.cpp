@@ -7,16 +7,16 @@ bool cmp(int x, int y){
 }
 set <pi> ex; 
 void ins(int l, int r) {
-    int p = r - l;
-    int l1 = lcp(l, r);
-    int l2 = lcs(l - 1, r - 1);
-    int L = l - l2, R = r + l1 - 1; 
-    if(R - L + 1 >= 2 * p) {
-        auto iter = ex.lower_bound(pi(L, R));
-        if(iter != ex.end() && *iter == pi(L, R)) return ;
-        ex.emplace_hint(iter, pi(L, R));
-        runs.pb((run){L, R, p}); 
-    }
+	int p = r - l;
+	int l1 = lcp(l, r);
+	int l2 = lcs(l - 1, r - 1);
+	int L = l - l2, R = r + l1 - 1; 
+	if(R - L + 1 >= 2 * p) {
+		auto iter = ex.lower_bound(pi(L, R));
+		if(iter != ex.end() && *iter == pi(L, R)) return ;
+		ex.emplace_hint(iter, pi(L, R));
+		runs.pb((run){L, R, p}); 
+	}
 }
 void Run(int o){
 	static int s[N];
