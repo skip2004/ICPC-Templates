@@ -18,7 +18,7 @@ namespace BuildTree {
 		queue<int>q;q.push(1);
 		while (!q.empty()) {
 			int x=q.front();q.pop();
-			ANS[idom[x]].PB(x);fa[x][0]=idom[x];dep[x]=dep[idom[x]]+1;
+			ANS[idom[x]].push_back(x);fa[x][0]=idom[x];dep[x]=dep[idom[x]]+1;
 			rep(i,1,20) fa[x][i]=fa[fa[x][i-1]][i-1];
 			for (int v:V[x]) {
 				--deg[v];if (!deg[v]) q.push(v);
@@ -34,7 +34,7 @@ namespace BuildDAG {
 	void dfs(int x) {
 		id[dfn[x]=++cnt]=x;
 		for (int v:V[x]) if (!dfn[v])
-			BuildTree::V[x].PB(v), BuildTree::deg[v]++, anc[v] = x, dfs(v);
+			BuildTree::V[x].push_back(v), BuildTree::deg[v]++, anc[v] = x, dfs(v);
 	}
 	int fa[sz],mn[sz];
 	int find(int x) {
@@ -45,12 +45,10 @@ namespace BuildDAG {
 	}
 	int semi[sz];
 	void work() {
-		int x,y;
-		while (m--) read(x,y),V[x].PB(y),rV[y].PB(x);
 		dfs(1);
 		rep(i,1,n) fa[i]=i,mn[i]=1e9,semi[i]=i;
 		drep(w,n,2) {
-			x=id[w];int cur=1e9;
+			int x=id[w];int cur=1e9;
 			if (w>cnt) continue;
 			for (int v:rV[x]) {
 				if (!dfn[v]) continue;
@@ -58,7 +56,8 @@ namespace BuildDAG {
 				else find(v),chkmin(cur,mn[v]);
 			}
 			semi[x]=id[cur];mn[x]=cur;fa[x]=anc[x];
-			BuildTree::V[semi[x]].PB(x);BuildTree::deg[x]++;
+			BuildTree::V[semi[x]].push_back(x);BuildTree::deg[x]++;
 		}
 	}
+	void link(int x,int y){V[x].push_back(y),rV[y].push_back(x);}
 }
