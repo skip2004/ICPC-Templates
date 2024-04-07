@@ -1,3 +1,6 @@
+void init() {
+	nd = las = 1; 
+}
 void extend(int c, int k) {
 	int x = ++ nd, p = las; las = x;
 	len[x] = len[p] + 1, r[x] = k, ed[k] = x; 
@@ -12,12 +15,11 @@ void extend(int c, int k) {
 	memcpy(ch[cl], ch[q], 104);
 	lk[cl]= lk[q], lk[q] = lk[x] = cl;
 	for(; p && ch[p][c] == q; p = lk[p]) ch[p][c] = cl;
-}
-void init() {
+} // ex - sam, trie + bfs 
+void build() {
 	static int bin[N];
 	memset(bin, 0, sizeof (int) * (n + 1));
 	for(int i = 1; i <= nd; i++) ++ bin[len[i]];
 	for(int i = 1; i <= n; i++) bin[i] += bin[i - 1];
 	for(int i = nd; i; i--) A[bin[len[i]]--] = i; 
 }
-

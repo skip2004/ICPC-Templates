@@ -18,7 +18,8 @@ for(int o = 0; o < 2; o++)
 for(int i = 2; i <= T[o].nd; i++) {
 	int x = T[o].A[i];
 	vec[o][T[o].tag[x]].pb(x);
-}
+} // vec[0] : from left to right, node id of the colunm , vec[1] : from down to up
+// U : T[0].r[rt] - T[0].len[rt] + 1, D = U + vec[1][t].size() - 1, L = R - vec[0][t].size() + 1, R = T[0].r[rt]
 int x = T[0].fnd(T[0].ed[r], r - l + 1);
 int blk = T[0].tag[x];
 // distance to the right , 0 - base 

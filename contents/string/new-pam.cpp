@@ -23,8 +23,13 @@ while(x) {
 	if(pam :: d[x] == pam :: d[pam :: lk[x]]) { 
 		// when doing dp, the position i - len[x] ~ 
 		// i - (len[top[x]] + d[x]) have been updated (in i - d[x])
+		g[x] = f[i - pam :: len[pam :: top[x]]];
+        Add(g[x], g[pam :: lk[x]]);
 	}
-	else // update from i - len[x]
-		 // getting border : {x, top[x], d[x]}
-		x = pam :: lk[pam :: top[x]];
+	else {
+		// update from i - len[x]
+		g[x] = f[i - pam :: len[x]];
+	} 
+	Add(f[i], g[x]);
+	x = pam :: lk[pam :: top[x]];
 }

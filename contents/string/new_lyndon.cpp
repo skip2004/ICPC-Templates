@@ -9,7 +9,7 @@ vector <int> duval(vector <int> S) {
 	} return ans;  // [ans[i] + 1, ans[i + 1]] is a lyndon word  
 } 
 vector <int> min_rep(vector <int> S) {
-	int k = 0, i = 0, j = 1, n = size(S);
+	int k = 0, i = 0, j = 1, n = S.size();
 	while (k < n && i < n && j < n) {
 		if (S[(i + k) % n] == S[(j + k) % n]) k ++;
 		else {
