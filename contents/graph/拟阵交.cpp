@@ -29,7 +29,7 @@ namespace MatroidIntersection {
             else for (auto y:cycb) V[i].push_back(y);
         }
         rep(i,1,K) dis[i]={ll(1e18),K+1},fr[i]=0;
-        priority_queue<pair<pli,int>,vector<pair<pli,int>>,greater<pair<pli,int>>>q;
+        priority_queue<pair<pli,int>, vector<pair<pli,int>>, greater<pair<pli,int>>>q;
         for (auto x:A) dis[x]={W[x],0},q.push({dis[x],x});
         while (!q.empty()) {
             auto [ww,x]=q.top(); q.pop();
