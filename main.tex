@@ -8,7 +8,7 @@
 \usepackage{listings, color, setspace, titlesec, fancyhdr, mdframed, multicol}
 \usepackage{ucharclasses}
 \usepackage{xunicode, xltxtra}
-\usepackage[inner=1.35cm, outer=0.9cm, top=1.1cm, bottom=1.1cm]{geometry}
+\usepackage[inner=1.35cm, outer=0.9cm, top=1.3cm, bottom=1.3cm]{geometry}
 \usepackage{pdfpages}
 \usepackage{tocloft}
 \usepackage{nameref}
@@ -19,6 +19,7 @@
 \usepackage[table]{xcolor}
 \usepackage{tabularx}
 \usepackage{xeCJK}
+\usepackage{multirow}
 
 \usepackage{accsupp}
 \newcommand\emptyaccsupp[1]{\BeginAccSupp{ActualText={}}#1\EndAccSupp{}}
@@ -40,7 +41,7 @@
 
 \titlespacing*{\section}{0pt}{-1\baselineskip}{0.0\baselineskip}
 \titlespacing*{\subsection}{0pt}{-1\baselineskip}{0.0\baselineskip}
-\titlespacing*{\subsubsection}{0pt}{-0.1\baselineskip}{0.0\baselineskip}
+\titlespacing*{\subsubsection}{0pt}{0\baselineskip}{0.0\baselineskip}
 
 \setlength{\abovecaptionskip}{0pt}
 \setlength{\belowcaptionskip}{0pt}
@@ -83,16 +84,19 @@
 	\includegraphics[scale=0.5]{others/Peking_University_logo.png}
 \end{figure*}
 
-\center\fontsize{80.0pt}{\baselineskip}\selectfont Let it Rot
+\center\fontsize{100.0pt}{\baselineskip}\selectfont Let it Rot
 
 
+\vspace*{3cm}
 {\LARGE
-\begin{tabular}{ccc}
 \centering
-\rule{0pt}{16pt} 钱易 & 彭博 & 冯施源 \\
-\rule{0pt}{16pt} Yi Qian & Bo Peng & Shiyuan Feng \\
+\begin{tabular}{ccc@{\hspace{1.5cm}}ccc}
+\multicolumn{3}{c}{Coach} & \multicolumn{3}{c}{Contestant} \\
+张勤建 & & 罗国杰 & 钱易 & 彭博 & 冯施源 \\
+Qinjian Zhang & & Guojie Luo & Yi Qian & Bo Peng & Shiyuan Feng \\
 \end{tabular}
 }
+
 
 \center\fontsize{20.0pt}{\baselineskip}\selectfont ICPC World Finals Luxor 
 
@@ -169,6 +173,7 @@
 \subsection{Tree And Graph}
 \input{contents/graph/TreeAndGraph.tex}
 
+x 
 \subsection{拟阵交}
 \inputminted{cpp}{contents/graph/拟阵交.cpp}
 
@@ -400,6 +405,25 @@ $$
 \subsection{常数表}
 \input{contents/tables/Addon.tex}
 
+\section{注意事项}
+\subsection{测试项目}
+pbds tree,
+float128, int128, long double
+submit 命令,
+printfile,
+MLE ?= RE,
+axv2,
+python,
+\newline
+\subsection{bugs}
+变量 shadow,
+清空,
+long long,
+数组大小,
+模数,
+MLE?,
+对拍记得看输出在不在变
+\newline
 \onecolumn
 \newpage
 
