@@ -40,7 +40,7 @@ struct plane {
 	}
 	db side(p3 x) const { return n % x - d; }
 	db dist(p3 w) const { return side(w) / n.abs(); }
-	p3 proj(p3 w) const { return w - n * (side(w) / n.abs()); }
+	p3 proj(p3 w) const { return w - n * (side(w) / n.norm()); }
 };
 
 // need testing -----------------------------------

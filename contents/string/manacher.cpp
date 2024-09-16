@@ -1,16 +1,15 @@
-S[1] = '%';
-for(int i = 1; i <= len; i++){
-	S[i << 1] = '&'; 
-	S[i << 1|1] = s[i];
-} 
-len = len << 1 | 1;
-S[++len] = '&';
-S[++len] = '$';
-int mx = 0, id = 0, ans = 0;
-for(int i = 1; i <= len; i++){
-	if(mx > i) p[i] = min(p[id * 2 - i], mx - i);
-	else p[i] = 1;
-	while(S[i - p[i]] == S[i + p[i]]) ++p[i];
-	if(i + p[i] > mx) id = i, mx = i + p[i];
-	ans = max(ans, p[i] - 1);
+std::vector<int> getrev(const std::string & s, bool is_even) {
+	const int N = s.size() - is_even;
+	std::vector<int> o(N); // 半径
+	for(int i = 0, mid2 = 0, r = 0;i < N;++i) {
+		int & x = o[i] = 0;
+		if(i < r) x = std::min(r - i, o[mid2 - i]);
+		for(;i - x >= 0 && i + x < N && s[i - x] == s[i + x + is_even];)
+			++ x;
+		if(i + x > r) {
+			mid2 = i * 2 + is_even;
+			r = i + x;
+		}
+	}
+	return o;
 }

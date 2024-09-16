@@ -1,20 +1,19 @@
-namespace pam{
-	int ch[N][26], len[N], lk[N];
-	int rp, las, nd;
-	void init(){
-		for(int i=0; i<=nd; i++)
-			len[i] = lk[i] = trs[i] = 0,
-				memset(ch[i],0,sizeof(ch[i]));
-		rp = 0; las = nd = 1;
-		len[1] = -1; lk[0] = 1;
-	} 
-	int jmp(int x){ while(S[rp-len[x]-1] != S[rp]) x=lk[x]; return x; }
-	void extend(int c){
-		++rp; int p = jmp(las);
-		if(!ch[p][c]){
-			len[++nd] = len[p] + 2;
-			lk[nd] = ch[jmp(lk[p])][c]; 
-			ch[p][c] = nd;
-		} las = ch[p][c];
-	}
+int c[N][26], fail[N], len[N], tot;
+void init() {
+    fail[0] = 1, len[++tot] = -1;
+    // root is 1
+}
+int get_fail(int o, char * x) {
+    for(;*x != x[-len[o] - 1];)
+        o = fail[o];
+    return o;
+}
+int append(int o, char * x) {
+    o = get_fail(o, x);
+    int & p = c[o][*x - 'a'];
+    if(!p) {
+        fail[++tot] = c[get_fail(fail[o], x)][*x - 'a'];
+        len[p = tot] = len[o] + 2;
+    }
+    return p;
 }

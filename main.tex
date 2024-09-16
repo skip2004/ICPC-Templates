@@ -20,6 +20,7 @@
 \usepackage{tabularx}
 \usepackage{xeCJK}
 \usepackage{multirow}
+\usepackage{svg}
 
 \usepackage{accsupp}
 \newcommand\emptyaccsupp[1]{\BeginAccSupp{ActualText={}}#1\EndAccSupp{}}
@@ -39,9 +40,10 @@
 \XeTeXlinebreaklocale "zh"
 \XeTeXlinebreakskip = 0pt plus 1pt
 
-\titlespacing*{\section}{0pt}{-1\baselineskip}{0.0\baselineskip}
-\titlespacing*{\subsection}{0pt}{-1\baselineskip}{0.0\baselineskip}
-\titlespacing*{\subsubsection}{0pt}{0\baselineskip}{0.0\baselineskip}
+% \titlespacing*{\section}{0pt}{-1\baselineskip}{0.0\baselineskip}
+% \titlespacing*{\subsection}{0pt}{-1\baselineskip}{0.0\baselineskip}
+% \titlespacing*{\subsubsection}{0pt}{0\baselineskip}{0.0\baselineskip}
+% 段落间距
 
 \setlength{\abovecaptionskip}{0pt}
 \setlength{\belowcaptionskip}{0pt}
@@ -57,7 +59,7 @@
 
 
 \setminted[cpp]{
-	style=myxcode,
+	style=xcode,
 	mathescape,
 	linenos,
 	autogobble,
@@ -84,21 +86,29 @@
 	\includegraphics[scale=0.5]{others/Peking_University_logo.png}
 \end{figure*}
 
-\center\fontsize{100.0pt}{\baselineskip}\selectfont Let it Rot
+
+\begin{center}
+    \includesvg{name/r.svg}
+    \includesvg{name/o.svg}
+    \includesvg{name/y.svg}
+    \includesvg{name/g.svg}
+    \includesvg{name/b.svg}
+    \includesvg{name/p.svg}
+\end{center}
 
 
-\vspace*{3cm}
-{\LARGE
-\centering
-\begin{tabular}{ccc@{\hspace{1.5cm}}ccc}
-\multicolumn{3}{c}{Coach} & \multicolumn{3}{c}{Contestant} \\
-张勤建 & & 罗国杰 & 钱易 & 彭博 & 冯施源 \\
-Qinjian Zhang & & Guojie Luo & Yi Qian & Bo Peng & Shiyuan Feng \\
-\end{tabular}
-}
+% \vspace*{3cm}
+% {\LARGE
+% \centering
+% \begin{tabular}{ccc@{\hspace{1.5cm}}ccc}
+% \multicolumn{3}{c}{Coach} & \multicolumn{3}{c}{Contestant} \\
+% 张勤建 & & 罗国杰 & 钱易 & 彭博 & 冯施源 \\
+% Qinjian Zhang & & Guojie Luo & Yi Qian & Bo Peng & Shiyuan Feng \\
+% \end{tabular}
+% }
 
 
-\center\fontsize{20.0pt}{\baselineskip}\selectfont ICPC World Finals Luxor 
+% \center\fontsize{20.0pt}{\baselineskip}\selectfont ICPC World Finals Luxor 
 
 \thispagestyle{empty}
 \pagebreak
@@ -106,7 +116,7 @@ Qinjian Zhang & & Guojie Luo & Yi Qian & Bo Peng & Shiyuan Feng \\
 \end{titlepage}
 
 \pagestyle{fancy}
-    \lhead{\large Peking University-Let it Rot}
+    % \lhead{\large Peking University-Let it Rot}
     \rhead{\Huge \thepage}
 
 \setcounter{tocdepth}{3}
@@ -120,8 +130,8 @@ Qinjian Zhang & & Guojie Luo & Yi Qian & Bo Peng & Shiyuan Feng \\
 
 \section{图论}
 
-\subsection{欧拉回路} % !!! pb
-\inputminted{cpp}{contents/graph/eulertour.cpp}
+% \subsection{欧拉回路} % !!! pb
+% \inputminted{cpp}{contents/graph/eulertour.cpp}
 
 \subsection{二分图匹配 | 最小边覆盖}
 \inputminted{cpp}{contents/graph/bi_match.cpp}
@@ -132,8 +142,8 @@ Qinjian Zhang & & Guojie Luo & Yi Qian & Bo Peng & Shiyuan Feng \\
 \subsection{最小费用流}
 \inputminted{cpp}{contents/graph/MCMF.cpp}
 
-\subsection{二分图最大权匹配 | KM} % !!! pb
-\inputminted{cpp}{contents/graph/KM.cpp}
+% \subsection{二分图最大权匹配 | KM} % !!! pb
+% \inputminted{cpp}{contents/graph/KM.cpp}
 
 \subsection{一般图最大匹配 | 带花树}
 \inputminted{cpp}{contents/graph/带花树.cpp}
@@ -146,37 +156,35 @@ Qinjian Zhang & & Guojie Luo & Yi Qian & Bo Peng & Shiyuan Feng \\
 时间复杂度 $O(\frac{n^2}{w})$, 可以对于边修改不多的图快速计算。
 \inputminted{cpp}{contents/graph/kasaraju.cpp}
 
-\subsection{缩点 | Tarjan} % !!! pb
-\inputminted{cpp}{contents/graph/tarjan.cpp}
-
-\subsection{缩点 | 点双} % !!! pb
-\inputminted{cpp}{contents/graph/tarjan_vertex.cpp}
-
-\subsection{缩点 | 边双} % !!! pb
-\inputminted{cpp}{contents/graph/tarjan_edge.cpp}
-
-\subsection{仙人掌}
-\inputminted{cpp}{contents/graph/cactus.cpp}
-
-\subsection{2-Sat}
-\inputminted{cpp}{contents/graph/2-sat.cpp}
-
-\subsection{支配树}
-\inputminted{cpp}{contents/graph/支配树.cpp}
-
-\subsection{三/四元环}
-\inputminted{cpp}{contents/graph/34cycle.cpp}
-
-\subsection{双极定向}
-\inputminted{cpp}{contents/graph/双极定向.cpp}
-
+% \subsection{缩点 | Tarjan} % !!! pb
+% \inputminted{cpp}{contents/graph/tarjan.cpp}
+% 
+% \subsection{缩点 | 点双} % !!! pb
+% \inputminted{cpp}{contents/graph/tarjan_vertex.cpp}
+% 
+% \subsection{缩点 | 边双} % !!! pb
+% \inputminted{cpp}{contents/graph/tarjan_edge.cpp}
+% 
+% \subsection{仙人掌}
+% \inputminted{cpp}{contents/graph/cactus.cpp}
+% 
+% \subsection{2-Sat}
+% \inputminted{cpp}{contents/graph/2-sat.cpp}
+% 
+% \subsection{支配树}
+% \inputminted{cpp}{contents/graph/支配树.cpp}
+% 
+% \subsection{三/四元环}
+% \inputminted{cpp}{contents/graph/34cycle.cpp}
+% 
+% \subsection{双极定向}
+% \inputminted{cpp}{contents/graph/双极定向.cpp}
 \subsection{Tree And Graph}
 \input{contents/graph/TreeAndGraph.tex}
 
-x 
-\subsection{拟阵交}
-\inputminted{cpp}{contents/graph/拟阵交.cpp}
-
+% \subsection{拟阵交}
+% \inputminted{cpp}{contents/graph/拟阵交.cpp}
+% x
 
 \section{数论}	
 
@@ -197,6 +205,13 @@ result=\sum_{i=0}^{n-1} \lfloor \frac{ai + b}{m} \rfloor \pmod{2^{63}}
 $$
 
 \inputminted{cpp}{contents/numbertheory/floor_sum.cpp}
+
+\subsection{Min of Mod of Linear}
+$$
+result=\min_{0 \leq i < n} \{ (a i + b) \% m \}
+$$
+
+\inputminted{cpp}{contents/numbertheory/minmod.cpp}
 
 \subsection{Stern-Brocot Tree 二分}
 
@@ -259,39 +274,28 @@ $$
 \inputminted{cpp}{contents/math/Goldensectionsearch.cpp}
 
 \section{字符串}
+
 \subsection{后缀自动机 | SAM}
 需要两倍点数量。
-\inputminted{cpp}{contents/string/new-sam.cpp}
+\inputminted{cpp}{contents/string/SAM.cpp}
 
-\subsection{基本子串字典}
-\inputminted{cpp}{contents/string/基本子串字典.cpp}
-
-\subsection{DAG 剖分}
-\inputminted{cpp}{contents/string/dag剖.cpp}
-
-\subsection{exKMP}
-\inputminted{cpp}{contents/string/exkmp.cpp}
-
-\subsection{log 个最小后缀}
-\inputminted{cpp}{contents/string/log个最小后缀.cpp}
-
-\subsection{SA}
-\inputminted{cpp}{contents/string/SA.cpp}
-
-\subsection{PAM}
-\inputminted{cpp}{contents/string/new-pam.cpp}
+\subsection{回文自动机 | PAM}
+\inputminted{cpp}{contents/string/PAM.cpp}
 
 \subsection{AC 自动机}
 \inputminted{cpp}{contents/string/AC自动机.cpp}
 
+\subsection{SA}
+\inputminted{cpp}{contents/string/SA.cpp}
+
+\subsection{exKMP}
+\inputminted{cpp}{contents/string/Zalgo.cpp}
+
 \subsection{Manacher}
 \inputminted{cpp}{contents/string/manacher.cpp}
-
-\subsection{Lyndon/最小表示法}
-\inputminted{cpp}{contents/string/new_lyndon.cpp}
-
-\subsection{Runs}
-\inputminted{cpp}{contents/string/run.cpp}
+% 
+% \subsection{Lyndon/最小表示法}
+% \inputminted{cpp}{contents/string/new_lyndon.cpp}
 
 \section{数据结构}
 \subsection{区间加区间求和 树状数组}
@@ -333,7 +337,6 @@ $$
 
 \subsection{凸包}
 结果为逆时针。
-
 \inputminted{cpp}{contents/geometry/凸包.cpp}
 
 \subsection{上凸壳}
@@ -348,6 +351,7 @@ $$
 
 \subsection{凸包直径}
 \inputminted{cpp}{contents/geometry/凸包直径.cpp}
+% https://codeforces.com/blog/entry/48868?#comment-329264
 
 \subsection{切凸包}
 \inputminted{cpp}{contents/geometry/切凸包.cpp}
