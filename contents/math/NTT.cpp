@@ -5,7 +5,7 @@ int pow(int a, int b, int ans = 1) {
 	return ans;
 }
 void init(int len) {
-	lim = 2 << std::__lg(len - 1);
+	for(lim = 1;lim < len;lim <<= 1);
 	invlim = mod - (mod - 1) / lim;
 	for(static int i = 1;i < lim;i += i) {
 		wn[i] = 1;
@@ -22,8 +22,8 @@ void DFT(int * a) {
 	static u64 t[N];
 	for(int i = 0;i < lim;++i) t[i] = a[rev[i]];
 	for(int i = 1;i < lim;i += i) {
-		for(int k = i & (1 << 19);k--;) 
-			if(t[k] >= mod * 9ull) t[k] -= mod * 9ull;
+		if(i >> 19 & 1)
+			for(int k = 0;k < lim;++k) t[k] %= mod;
 		for(int j = 0;j < lim;j += i + i) {
 			for(int k = 0;k < i;++k) {
 				const u64 x = t[i + j + k] * wn[i + k] % mod;

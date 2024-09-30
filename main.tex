@@ -254,8 +254,28 @@ $$
 \subsection{全在线卷积}
 \inputminted{cpp}{contents/math/online_convolution.cpp}
 
-\subsection{Berlekamp Massey}
+\subsection{常系数线性递推}
+\subsubsection{Berlekamp Massey}
 \inputminted{cpp}{contents/math/BM.cpp}
+
+\subsubsection{递推式转分式}
+
+$$
+a_i = \sum_{j=1}^{d} c_j a_{i-j}, i \geq d \Leftrightarrow a_i = \left\lbrack x^i \right\rbrack \frac{p(x)}{q(x)}
+$$
+
+\inputminted{cpp}{contents/math/线性递推形式转换.cpp}
+\subsubsection{Bostan–Mori}
+$$ \left\lbrack x^k\right\rbrack \frac{p(x)}{q(x)} $$
+
+\inputminted{cpp}{contents/math/bostan_mori.cpp}
+
+\subsubsection{远处区间值}
+$$ \left\lbrack x^{\left\lbrack k,k+m\right)}\right\rbrack \frac{p(x)}{q(x)}$$
+
+如果 $deg(p) \geq deg(q)$, 请使用 solve\_x，不然可以直接使用 solve。
+
+\inputminted{cpp}{contents/math/Fiduccia.cpp}
 
 \subsection{线性规划 | 单纯形法}
 \inputminted{cpp}{contents/math/LP.cpp}

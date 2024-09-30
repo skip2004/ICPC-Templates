@@ -5,7 +5,7 @@ const db pi = std::acos(-1);
 int rev[N], lim;
 cp wn[N];
 void init(int len) {
-	lim = 2 << std::__lg(len - 1);
+	for(lim = 1;lim < len;lim <<= 1);
 	for(static int i = 1;i < lim;i += i) {
 		for(int j = 0;j < i;++j) {
 			wn[i + j] = std::polar(1., db(j) / i * pi);
