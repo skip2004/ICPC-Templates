@@ -130,8 +130,6 @@
 
 \section{图论}
 
-% \subsection{欧拉回路} % !!! pb
-% \inputminted{cpp}{contents/graph/eulertour.cpp}
 
 \subsection{二分图匹配 | 最小边覆盖}
 \inputminted{cpp}{contents/graph/bi_match.cpp}
@@ -142,19 +140,33 @@
 \subsection{最小费用流}
 \inputminted{cpp}{contents/graph/MCMF.cpp}
 
-% \subsection{二分图最大权匹配 | KM} % !!! pb
-% \inputminted{cpp}{contents/graph/KM.cpp}
+\subsection{二分图最小权匹配 | KM}
+
+返回左边每个点匹配的右边点的编号，左边的点不多于右边的点（必要时补点）。
+
+\inputminted{cpp}{contents/graph/KM.cpp}
 
 \subsection{一般图最大匹配 | 带花树}
 \inputminted{cpp}{contents/graph/带花树.cpp}
 
 \subsection{最小树形图}
-抄罗大的，返回值是边的集合，如果没有最小树形图会返回空集（注意 $n=1$)，可以修改建图。
+返回值是边的集合，如果没有最小树形图会返回空集（注意 $n=1$)，可以修改建图。
 \inputminted{cpp}{contents/graph/D-MST.cpp}
 
 \subsection{缩点 | kasaraju}
 时间复杂度 $O(\frac{n^2}{w})$, 可以对于边修改不多的图快速计算。
 \inputminted{cpp}{contents/graph/kasaraju.cpp}
+
+\subsection{欧拉回路/欧拉路径}
+
+如果是无向图，两个方向都连边，id 相同。不同的边 id 不同且在 $[1, m]$ 里。
+
+src 是起点，如果是欧拉路径，找一个度数为奇数(无向图)/出度大于入度(有向图)的点作为 src，如果是回路，选一个度数非零的点作为 src。
+
+如果有解，求出路径是 $s$，那么返回 $[(s_1 = src, -1), (s_2, id(s_1 \rightarrow s_2)), \ldots, (s_n, id(s_{n-1} \rightarrow s_n))]$，如果是回路，那么 $s_n = s_1 = src$。无解则返回空集。
+
+
+\inputminted{cpp}{contents/graph/eulerwalk.cpp}
 
 % \subsection{缩点 | Tarjan} % !!! pb
 % \inputminted{cpp}{contents/graph/tarjan.cpp}
@@ -313,6 +325,9 @@ $$
 
 \subsection{Manacher}
 \inputminted{cpp}{contents/string/manacher.cpp}
+
+\subsection{最小表示法}
+\inputminted{cpp}{contents/string/minrep.cpp}
 % 
 % \subsection{Lyndon/最小表示法}
 % \inputminted{cpp}{contents/string/new_lyndon.cpp}
@@ -336,6 +351,9 @@ $$
 \section{geometry}
 \subsection{向量}
 \inputminted{cpp}{contents/geometry/向量.cpp}
+
+\subsection{三角形各心}
+\inputminted{cpp}{contents/geometry/centers.cpp}
 
 \subsection{直线半平面}
 \inputminted{cpp}{contents/geometry/直线半平面.cpp}

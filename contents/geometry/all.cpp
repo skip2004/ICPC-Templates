@@ -48,6 +48,31 @@ bool cmp_ct(p2 A, p2 B, p2 C) {
 		return cmp(B, C) && cmp(C, A);
 	}
 }
+
+p2 bary(p2 a, p2 b, p2 c, db A, db B, db C) {
+	return (a * A + b * B + c * C) / (A + B + C);
+}
+p2 centroid(p2 A, p2 B, p2 C) {
+    return bary(A, B, C, 1, 1, 1);
+} // 重心
+p2 circumcenter(p2 A, p2 B, p2 C) {
+    db a = (B - C).norm(), b = (C - A).norm(), c = (A - B).norm();
+    return bary(A, B, C, a*(b+c-a), b*(c+a-b), c*(a+b-c));
+} // 外心，外接圆圆心，三边中垂线的交点
+p2 incenter(p2 A, p2 B, p2 C) {
+    return bary(A, B, C, (B-C).abs(), (A-C).abs(), (A-B).abs());
+} // 内心，内接圆圆心，三角角平分线的交点
+p2 orthocenter(p2 A, p2 B, p2 C) {
+    db a = (B - C).norm(), b = (C - A).norm(), c = (A - B).norm();
+    return bary(A, B, C, (a+b-c)*(c+a-b), (b+c-a)*(a+b-c), (c+a-b)*(b+c-a));
+} // 垂心，三条高线所在的交点
+p2 excenter(p2 A, p2 B, p2 C) {
+    db a = (B - C).abs(), b = (A - C).abs(), c = (A - B).abs();
+    return bary(A, B, C, -a, b, c);
+    // return bary(A, B, C, a, -b, c);
+    // return bary(A, B, C, a, b, -c);
+} // 旁心 一个内角的平分线和其他两个内角的外角平分线的交点
+
 db cross(p2 x, p2 y, p2 z) {
 	return (y.x - x.x) * (z.y - x.y) - (y.y - x.y) * (z.x - x.x);
 }
@@ -254,15 +279,15 @@ db mindist(std::vector<p2> a) {
 	solve(solve, 0, a.size());
 	return ans;
 }
-circle incircle(p2 a, p2 b, p2 c) { // 三点确定内心
+circle incircle(p2 a, p2 b, p2 c) {
 	db A = (b - c).abs(), B = (c - a).abs(), C = (a - b).abs();
 	return {(a * A + b * B + c * C) / (A + B + C), fabs((b - a) * (c - a)) / (A + B + C)};
-}
-circle circumcenter(p2 a, p2 b, p2 c) { // 三点确定外心
+} // 三点确定内接圆, 不是最小圆覆盖内容
+circle circumcircle(p2 a, p2 b, p2 c) {
 	p2 bc = c - b, ca = a - c, ab = b - a;
 	p2 o = (b + c - r90(bc) * (ca % ab) / (ca * ab)) / 2;
 	return {o, (a - o).abs()};
-}
+} // 三点确定外接圆
 circle cir(p2 a, p2 b) { // 根据直径生成圆
 	return {(a + b) / 2, (a - b).abs() / 2};
 }
@@ -278,7 +303,7 @@ circle mincircle(std::vector<p2> a) { // 最小圆覆盖，需要 shuffle
 			o = cir(a[j], a[i]);
 			for(int k = 0;k < j;++k) {
 				if(in(o, a[k])) continue;
-				o = circumcenter(a[i], a[j], a[k]);
+				o = circumcircle(a[i], a[j], a[k]);
 			}
 		}
 	}
@@ -339,12 +364,10 @@ std::vector<std::vector<line>> voronoi(std::vector<p2> p) {
 
 int main() {
 	std::ios::sync_with_stdio(false), cin.tie(0);
-	int n;
-	cin >> n;
-	std::vector<p2> a(n);
-	for(int i = 0;i < n;++i) {
+	std::vector<p2> a(3);
+	for(int i = 0;i < 3;++i) {
 		cin >> a[i].x >> a[i].y;
 	}
-	a = gethull(a);
-	printf("%.10Lf\n", convex_diameter(a));
+	auto res = incenter(a[0], a[1], a[2]);
+	printf("%.10Lf %.10Lf %.10Lf", res.x, res.y, (db)fabs(dist(line(a[0], a[1]), res)));
 }

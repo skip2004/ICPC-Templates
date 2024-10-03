@@ -40,3 +40,12 @@
         \right.\]
     where the $x_{ij}$ are indeterminates. $G$有完美匹配当且仅当关于$x_{ij}$的多项式$det(A_{ij})$不恒为$0$.
     完美匹配的个数等于多项式中单项式的个数.
+\subsubsection{Erdős–Gallai theorem}
+度数序列 $d_1 \geq \cdots \geq d_n$ 存在对应的简单图当且仅当：
+
+$$
+\begin{cases}
+    \sum_{i=1}^{n}d_i \text{ 为偶数} \\
+    \forall k \in [1,n] : \sum_{i=1}^{k}d_i \leq k(k-1)+\sum_{i=k+1}^{n}\min(d_i,k)
+\end{cases}
+$$

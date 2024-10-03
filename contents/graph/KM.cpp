@@ -1,37 +1,28 @@
-namespace KM {
-	int nl,nr;
-	ll e[sz][sz];
-	ll lw[sz],rw[sz];
-	int lpr[sz],rpr[sz];
-	int vis[sz],fa[sz];
-	ll mnw[sz];
-	void work(int x) {
-		int xx=x;
-		rep(i,1,nr) vis[i]=0,mnw[i]=1e18;
-		while (233) {
-			rep(i,1,nr) if (!vis[i]&&chkmin(mnw[i],lw[x]+rw[i]-e[x][i])) fa[i]=x; 
-			ll mn=1e18; int y=-1;
-			rep(i,1,nr) if (!vis[i]&&chkmin(mn,mnw[i])) y=i;
-			lw[xx]-=mn; rep(i,1,nr) if (vis[i]) rw[i]+=mn,lw[rpr[i]]-=mn; else mnw[i]-=mn;
-			if (rpr[y]) x=rpr[y],vis[y]=1; else { while (y) rpr[y]=fa[y],swap(y,lpr[fa[y]]); return; }
+ll e[N][N];
+std::vector<int> KM(int n, int m) {
+	std::vector<ll> l(n + 1), r(m + 1);
+	std::vector<int> p(m + 1), ans(n + 1);
+	for(int i = 1;i <= n;++i) {
+		std::vector<ll> d(m + 1, 1e18);
+		std::vector<int> pre(m + 1), done(m + 1);
+		int x, v, u = 0;
+		for(p[0] = i;x = p[u];u = v) {
+			done[u] = 1;
+			ll min = 1e18;
+			for(int j = 1;j <= m;++j) if(!done[j]) {
+				auto w = e[x][j] - l[x] - r[j];
+				if(w < d[j]) d[j] = w, pre[j] = u;
+				if(d[j] < min) min = d[j], v = j;
+			}
+			for(int j = 0;j <= m;++j) {
+				if(done[j]) l[p[j]] += min, r[j] -= min;
+				else d[j] -= min;
+			}
+		}
+		for(int v;u;u = v) {
+			v = pre[u], p[u] = p[v];
 		}
 	}
-	void init(int nl,int nr) {
-		assert(nl<=nr);
-		KM::nl=nl,KM::nr=nr;
-		rep(i,1,nl) lw[i]=-1e18;
-		rep(i,1,nl) rep(j,1,nr) e[i][j]=0; // or -1e18
-	}
-	void clr() {
-		rep(i,1,nl) lpr[i]=lw[i]=0;
-		rep(i,1,nr) rpr[i]=rw[i]=vis[i]=fa[i]=mnw[i]=0;
-		rep(i,1,nl) rep(j,1,nr) e[i][j]=0;
-	}
-	void addedge(int x,int y,ll w){chkmax(e[x][y],w),chkmax(lw[x],w);}
-	ll work() {
-		rep(i,1,nl) work(i);
-		ll tot=0;
-		rep(i,1,nl) tot+=e[i][lpr[i]];
-		return tot;
-	}
+	for(int j = 1;j <= m;++j) ans[p[j]] = j;
+	return ans; // 权值和 : -r[0]
 }
