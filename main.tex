@@ -131,20 +131,28 @@
 
 \section{图论}
 
-\subsection{二分图匹配 | 最小边覆盖}
-\inputminted{cpp}{contents/graph/bi_match.cpp}
+\subsection{二分图匹配}
+\subsubsection{匈牙利匹配 \& 最小边覆盖}
+\inputminted{cpp}{contents/graph/matching/dfs-matching.cpp}
+
+\subsubsection{匈牙利匹配 (bitset 优化)}
+\inputminted{cpp}{contents/graph/matching/bitset-dfs-matching.cpp}
+
+\subsubsection{Hopcroft-Karp \& 最小边覆盖}
+\inputminted{cpp}{contents/graph/matching/HK.cpp}
+
+\subsubsection{二分图最小权匹配 (KM)}
+
+返回左边每个点匹配的右边点的编号，左边的点不多于右边的点（必要时补点）。
+
+\inputminted{cpp}{contents/graph/matching/KM.cpp}
+
 
 \subsection{网络最大流 | dinic}
 \inputminted{cpp}{contents/graph/dinic.cpp}
 
 \subsection{最小费用流}
 \inputminted{cpp}{contents/graph/MCMF.cpp}
-
-\subsection{二分图最小权匹配 | KM}
-
-返回左边每个点匹配的右边点的编号，左边的点不多于右边的点（必要时补点）。
-
-\inputminted{cpp}{contents/graph/KM.cpp}
 
 \subsection{一般图最大匹配 | 带花树}
 \inputminted{cpp}{contents/graph/带花树.cpp}
