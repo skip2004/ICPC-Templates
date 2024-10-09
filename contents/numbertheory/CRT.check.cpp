@@ -10,7 +10,7 @@ void exgcd(ll a, ll b, ll & x, ll & y) {
 	exgcd(b, a % b, y, x), y -= a / b * x;
 }
 
-ll exCRT(ll a1, ll p1, ll a2, ll p2) {
+ll CRT(ll a1, ll p1, ll a2, ll p2) {
 	ll a, b, gcd = std::gcd(p1, p2);
 	if((a1 - a2) % gcd) 
 		return -1;
@@ -26,7 +26,7 @@ int main() {
 	for(int i = 0;i < n;++i) {
 		ll x, y;
 		cin >> y >> x;
-		a = exCRT(a, p, x, y);
+		a = CRT(a, p, x, y);
 		p = std::lcm(p, y);
 	}
 	cout << a << '\n';

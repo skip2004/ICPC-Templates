@@ -3,11 +3,8 @@ const db eps = 1e-16;
 int sgn(db x) { return x < -eps ? -1 : x > eps; }
 namespace LP {
 	const int N = 21, M = 21;
-	int n, m; // n : 变量个数，m : 约束个数
+	int n, m;
 	db a[M + N][N], x[N + M];
-	// 约束：对于 1 <= i <= m : a[i][0] + \sum_j x[j] * a[i][j] >= 0
-	// x[j] >= 0
-	// 最大化 \sum_j x[j] * a[0][j]
 	int id[N + M];
 	void pivot(int p, int o) {
 		std::swap(id[p], id[o + n]);

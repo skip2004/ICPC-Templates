@@ -16,4 +16,4 @@ std::vector<int> BM(std::vector<int> a) {
 	std::vector<int> c(len);
 	for(int i = 0;i < len;++i) c[i] = (mod - res[i + 1]) % mod;
 	return c;
-} // $a_n = \sum_{i=0}^{size(c)-1} c_i a_{n-1-i}$
+}

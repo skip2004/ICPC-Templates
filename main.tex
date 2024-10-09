@@ -148,21 +148,26 @@
 \inputminted{cpp}{contents/graph/matching/KM.cpp}
 
 
-\subsection{网络最大流 | dinic}
+\subsection{网络最大流 (dinic)}
 \inputminted{cpp}{contents/graph/dinic.cpp}
 
 \subsection{最小费用流}
 \inputminted{cpp}{contents/graph/MCMF.cpp}
 
-\subsection{一般图最大匹配 | 带花树}
+\subsection{一般图最大匹配 (带花树)}
+edge 里存双向边。运行结束后 match 存放每个点匹配的点的编号，如果没有匹配则为 $0$。
 \inputminted{cpp}{contents/graph/带花树.cpp}
 
 \subsection{最小树形图}
-返回值是边的集合，如果没有最小树形图会返回空集（注意 $n=1$)，可以修改建图。
+
+用 DMST::link 添加边，然后调用 DMST::solve(root) 得到最小树形图边的集合，如果没有合法解会返回空集 (注意 $n=1$)。
+
 \inputminted{cpp}{contents/graph/D-MST.cpp}
 
-\subsection{缩点 | kasaraju}
-时间复杂度 $O(\frac{n^2}{w})$, 可以对于边修改不多的图快速计算。
+\subsection{强连通分量 (kasaraju)}
+
+e 存有向边，re 里存反向边。用 solve 得到所有强连通分量。时间复杂度 $O(\frac{n^2}{w})$。
+
 \inputminted{cpp}{contents/graph/kasaraju.cpp}
 
 \subsection{欧拉回路/欧拉路径}
@@ -212,12 +217,14 @@ src 是起点，如果是欧拉路径，找一个度数为奇数(无向图)/出�
 \inputminted{cpp}{contents/numbertheory/approx.cpp}
 
 \subsection{扩展欧几里得}
+结果的 $x, y$ 满足：$ax + by = \gcd(a, b)$; 若 $a, b$ 非 $0$，则： $-b \leq x \leq b, -a \leq y \leq a$。
+
 \inputminted{cpp}{contents/numbertheory/exgcd.cpp}
 
 \subsection{万能欧几里得}
 \inputminted{cpp}{contents/numbertheory/Euclid.cpp}
 
-\subsection{直线下点数|欧几里得}
+\subsection{floor-sum}
 $n < 2 ^ {32}, 1 \leq m < 2 ^ {32}$
 
 $$
@@ -237,13 +244,21 @@ $$
 
 \inputminted{cpp}{contents/numbertheory/sbt.cpp}
 
-\subsection{扩展中国剩余定理}
-\inputminted{cpp}{contents/numbertheory/exCRT.cpp}
+\subsection{中国剩余定理}
+返回满足 $x \equiv a_i \pmod{m_i} (i = 1, 2)$ 的最小非负整数 $x$，若无解则返回 $-1$。
+
+\inputminted{cpp}{contents/numbertheory/CRT.cpp}
 
 \subsection{Miller-Rabin}
+
+调用 checkprime 判断是否为质数。
+
 \inputminted{cpp}{contents/numbertheory/Miller_Rabin.cpp}
 
 \subsection{Pollard-rho}
+
+调用 factor 获得 $x$ 质因子的可重集合（已从小到大排序）。
+
 \inputminted{cpp}{contents/numbertheory/pollard_rho.cpp}
 
 \section{Math}
@@ -276,6 +291,9 @@ $$
 
 \subsection{常系数线性递推}
 \subsubsection{Berlekamp Massey}
+
+返回最短的 $c$ 使得： $\forall n \geq size(c) : a_n = \sum_{i=0}^{size(c)-1} c_i a_{n-1-i}$
+
 \inputminted{cpp}{contents/math/BM.cpp}
 
 \subsubsection{递推式转分式}
@@ -297,7 +315,25 @@ $$ \left\lbrack x^{\left\lbrack k,k+m\right)}\right\rbrack \frac{p(x)}{q(x)}$$
 
 \inputminted{cpp}{contents/math/Fiduccia.cpp}
 
-\subsection{线性规划 | 单纯形法}
+\subsection{线性规划 (单纯形法)}
+$x[1\cdots n]$ 是变量，$a[1\cdots m][\cdots]$ 是约束。
+
+所有约束为：
+$$
+\begin{aligned}
+\forall i \in [1, m] &: a[i][0] + \sum_{j=1}^{n} a[i][j] x[j] \geq 0 \\
+\forall j \in [1, n] &: x[j] \geq 0
+\end{aligned}
+$$
+
+最大化
+$$
+\sum_{j=1}^{n} a[0][j] x[j]
+$$
+
+如果无解返回 nan，如果无界返回 inf。最后的 $x$ 里存放的是最优解。
+
+
 \inputminted{cpp}{contents/math/LP.cpp}
 
 \subsection{Simpson 积分}
@@ -311,15 +347,16 @@ $$
 $$
 
 \subsection{黄金三分}
+返回 $f$ 在 $[min(a, c), max(a, c)]$ 上的极大值点 (f 需要是单峰函数)。
 \inputminted{cpp}{contents/math/Goldensectionsearch.cpp}
 
 \section{字符串}
 
-\subsection{后缀自动机 | SAM}
+\subsection{后缀自动机 SAM}
 需要两倍点数量。
 \inputminted{cpp}{contents/string/SAM.cpp}
 
-\subsection{回文自动机 | PAM}
+\subsection{回文自动机 PAM}
 \inputminted{cpp}{contents/string/PAM.cpp}
 
 \subsection{AC 自动机}
@@ -329,13 +366,15 @@ $$
 \inputminted{cpp}{contents/string/SA.cpp}
 
 \subsection{Z algorithm}
-
+返回的 $lcp[i] = lcp(s, s[i:])$。
 \inputminted{cpp}{contents/string/Zalgo.cpp}
 
 \subsection{Manacher}
+返回每个回文中心的回文半径大小，奇偶分开考虑。
 \inputminted{cpp}{contents/string/manacher.cpp}
 
 \subsection{最小表示法}
+返回 $s$ 的最小表示的起始位置。可以用 rotate 算出最小表示的字符串。
 \inputminted{cpp}{contents/string/minrep.cpp}
 % 
 % \subsection{Lyndon/最小表示法}
@@ -343,16 +382,18 @@ $$
 
 \section{数据结构}
 \subsection{区间加区间求和 树状数组}
+add 区间加，query 区间求和。区间都是闭区间。
 \inputminted{cpp}{contents/ds/ex-bit.cpp}
 
 \subsection{zkw 线段树}
+单点修改区间半群。如果半群没有单位元可以用 qry2。
 \inputminted{cpp}{contents/ds/zkw-sgt.cpp}
 
 \subsection{Link Cut Tree}
 \inputminted{cpp}{contents/ds/LCT.cpp}
 
-\subsection{FHQ Treap} % !!! pb
-\inputminted{cpp}{contents/ds/fhq.cpp}
+% \subsection{FHQ Treap} % !!! pb
+% \inputminted{cpp}{contents/ds/fhq.cpp}
 
 \subsection{pbds tree}
 \inputminted{cpp}{contents/ds/pbds_tree.cpp}
@@ -433,6 +474,10 @@ $$
 \inputminted{cpp}{contents/misc/lcs.cpp}
 
 \subsection{日期公式}
+getday 返回自 $1/1/1$ 起到 $y/m/d$ 的天数，$1/1/1$ 是星期一，所以模 $7$ 可以得算出是周几。
+
+date 是 getday 的逆。
+
 \inputminted{cpp}{contents/misc/zeller.cpp}
 
 \subsection{Xorshift}

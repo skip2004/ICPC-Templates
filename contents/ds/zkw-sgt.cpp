@@ -20,7 +20,6 @@ struct seg {
 		}
 		return ans;
 	}
-	// if there is no I
 	ll qry2(int l, int r) {
 		if(l == r) return o[l + L];
 		ll le = o[l + L], ri = o[r + L];
