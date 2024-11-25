@@ -364,10 +364,11 @@ std::vector<std::vector<line>> voronoi(std::vector<p2> p) {
 
 int main() {
 	std::ios::sync_with_stdio(false), cin.tie(0);
-	std::vector<p2> a(3);
-	for(int i = 0;i < 3;++i) {
+	int n; cin >> n;
+	std::vector<p2> a(n);
+	for(int i = 0;i < n;++i) {
 		cin >> a[i].x >> a[i].y;
 	}
-	auto res = incenter(a[0], a[1], a[2]);
-	printf("%.10Lf %.10Lf %.10Lf", res.x, res.y, (db)fabs(dist(line(a[0], a[1]), res)));
+	a = gethull(a);
+	printf("%.10Lf\n", convex_diameter(a));
 }

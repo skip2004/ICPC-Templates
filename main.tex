@@ -170,11 +170,11 @@ edge 里存双向边。运行结束后 match 存放每个点匹配的点的编�
 
 \inputminted{cpp}{contents/graph/D-MST.cpp}
 
-\subsection{强连通分量 (kasaraju)}
+\subsection{强连通分量 (kosaraju)}
 
 e 存有向边，re 里存反向边。用 solve 得到所有强连通分量。时间复杂度 $O(\frac{n^2}{w})$。
 
-\inputminted{cpp}{contents/graph/kasaraju.cpp}
+\inputminted{cpp}{contents/graph/kosaraju.cpp}
 
 \subsection{欧拉回路/欧拉路径}
 
@@ -382,9 +382,9 @@ $$
 \subsection{最小表示法}
 返回 $s$ 的最小表示的起始位置。可以用 rotate 算出最小表示的字符串。
 \inputminted{cpp}{contents/string/minrep.cpp}
-% 
-% \subsection{Lyndon/最小表示法}
-% \inputminted{cpp}{contents/string/new_lyndon.cpp}
+
+\subsection{Lyndon 分解}
+\inputminted{cpp}{contents/string/lyndon.cpp}
 
 \section{数据结构}
 \subsection{区间加区间求和 树状数组}
@@ -394,6 +394,10 @@ add 区间加，query 区间求和。区间都是闭区间。
 \subsection{zkw 线段树}
 单点修改区间半群。如果半群没有单位元可以用 qry2。
 \inputminted{cpp}{contents/ds/zkw-sgt.cpp}
+
+\subsection{静态区间半群}
+$O(n \log n)$ 预处理，$O(1)$ 查询。
+\inputminted{cpp}{contents/ds/rangequery.cpp}
 
 \subsection{Link Cut Tree}
 \inputminted{cpp}{contents/ds/LCT.cpp}
