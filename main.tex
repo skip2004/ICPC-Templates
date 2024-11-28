@@ -41,10 +41,9 @@
 \XeTeXlinebreaklocale "zh"
 \XeTeXlinebreakskip = 0pt plus 1pt
 
-% \titlespacing*{\section}{0pt}{-1\baselineskip}{0.0\baselineskip}
-% \titlespacing*{\subsection}{0pt}{-1\baselineskip}{0.0\baselineskip}
-% \titlespacing*{\subsubsection}{0pt}{0\baselineskip}{0.0\baselineskip}
-% 段落间距
+\titlespacing*{\section}{0pt}{0\baselineskip}{0.0\baselineskip}
+\titlespacing*{\subsection}{0pt}{0\baselineskip}{0.0\baselineskip}
+\titlespacing*{\subsubsection}{0pt}{0\baselineskip}{0.0\baselineskip}
 
 \setlength{\abovecaptionskip}{0pt}
 \setlength{\belowcaptionskip}{0pt}
@@ -369,6 +368,7 @@ $$
 \inputminted{cpp}{contents/string/AC自动机.cpp}
 
 \subsection{SA}
+后缀数组， $sa$ 是个 $0 \sim n-1$ 的排列，$h[i] = lcp(s[sa[i]:], s[sa[i+1]:])$。
 \inputminted{cpp}{contents/string/SA.cpp}
 
 \subsection{Z algorithm}

@@ -1,3 +1,8 @@
+//https://uoj.ac/submission/725738
+
+#include<bits/stdc++.h>
+using std::cin, std::cout;
+
 auto SA(const std::vector<int> & s) {
 	int n = s.size();
 	std::vector<int> sa(n), gap(n), rk(n), h(n - 1);
@@ -21,4 +26,15 @@ auto SA(const std::vector<int> & s) {
 		h[rk[i] - 1] = k;
 	}
 	return std::pair(sa, h);
+}
+int main() {
+	std::ios::sync_with_stdio(false), cin.tie(0);
+	std::string s;
+	cin >> s;
+	std::vector<int> v(s.begin(), s.end());
+	auto [sa, h] = SA(v);
+	for(int x : sa) cout << x + 1 << ' ';
+	cout << '\n';
+	for(int x : h) cout << x << ' ';
+	cout << '\n';
 }
