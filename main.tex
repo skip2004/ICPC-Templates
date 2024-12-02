@@ -58,6 +58,24 @@
 \date{}
 
 
+\setminted[py]{
+	style=xcode,
+	mathescape,
+	linenos,
+	autogobble,
+	baselinestretch=0.8,
+	tabsize=3,
+	fontsize=\normalsize,
+	frame=single,
+	framesep=1mm,
+	framerule=0.3pt,
+	numbersep=1mm,
+	breaklines=true,
+	breaksymbolsepleft=2pt,
+	breakbytoken=false,
+	showtabs=true,
+	tab={\relscale{0.6} $\big\vert \ \ \ $ \relscale{1}},
+}
 \setminted[cpp]{
 	style=xcode,
 	mathescape,
@@ -128,6 +146,8 @@
 		\end{spacing}
 		\end{small}
 
+
+		\newpage
 \section{图论}
 
 \subsection{二分图匹配}
@@ -493,6 +513,12 @@ date 是 getday 的逆。
 \subsection{Xorshift}
 \inputminted{cpp}{contents/misc/xorshift.cpp}
 
+\subsection{python}
+\inputminted{py}{contents/misc/template.py}
+
+\subsection{浮点数精度}
+\inputminted{text}{contents/misc/ieee754.txt}
+
 \section{配置}
 
 \subsection{vimrc}
@@ -513,6 +539,7 @@ date 是 getday 的逆。
 
 \subsection{常数表}
 \input{contents/tables/Addon.tex}
+
 
 \section{注意事项}
 \subsection{测试项目}

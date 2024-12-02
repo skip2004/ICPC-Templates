@@ -1,0 +1,3 @@
+float       : 1 bit sign, 8 bit exponent, 23 bit mantissa
+double      : 1 bit sign, 11 bit exponent, 52 bit mantissa
+long double : 1 bit sign, 15 bit exponent, 64 bit mantissa
