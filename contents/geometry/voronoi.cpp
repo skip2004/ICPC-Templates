@@ -15,6 +15,10 @@ std::vector<line> cut(const std::vector<line> & o, line l) {
 	return res;
 } // 切凸包
 line bisector(p2 a, p2 b) { return line(a.x - b.x, a.y - b.y, (b.norm() - a.norm()) / 2); }
+line bisector(circle a, circle b) {
+	return line(a.x - b.x, a.y - b.y, (b.norm() - a.norm() + a.r * a.r - b.r * b.r) / 2);
+} // a b 不能是包含关系, for power diagram
+
 std::vector<std::vector<line>> voronoi(std::vector<p2> p) {
 	int n = p.size();
 	auto b = p; shuffle(b.begin(), b.end(), gen);

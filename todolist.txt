@@ -4,17 +4,9 @@ scaling 二分图最大权匹配
 
 优化半平面交依赖
 
-SA 基数排序
-
-KM 的精细优化？
-
-power diagram
-
 cppref 小抄
 
 闵可夫斯基和
-
-整除判定
 
 支配树
 

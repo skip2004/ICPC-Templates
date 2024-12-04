@@ -172,6 +172,10 @@
 
 \inputminted{cpp}{contents/graph/matching/KM.cpp}
 
+最小权匹配。返回代价和、右边每个点匹配的左边点的编号、对应的边权。过程中能计算出匹配为 $0 \cdots |match|$ 的最优解。
+
+时间复杂度 $O(|match|(L^2+|E|))$。
+\inputminted{cpp}{contents/graph/matching/newkm.cpp}
 
 \subsection{网络最大流 (dinic)}
 \inputminted{cpp}{contents/graph/dinic.cpp}
@@ -499,6 +503,10 @@ $O(n \log n)$ 预处理，$O(1)$ 查询。
 
 \subsection{Barrett}
 \inputminted{cpp}{contents/misc/Barrett.cpp}
+
+\subsection{快速整除判定}
+要求 $p$ 是奇数。如果是 (u)int128，求逆循环次数要改成 $6$。
+\inputminted{cpp}{contents/misc/fastdivcheck.cpp}
 
 \subsection{LCS}
 \inputminted{cpp}{contents/misc/lcs.cpp}
