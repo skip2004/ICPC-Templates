@@ -292,6 +292,10 @@ $$
 
 \inputminted{cpp}{contents/numbertheory/pollard_rho.cpp}
 
+\subsection{二次剩余}
+quadres 用于判断是否存在二次剩余，sqrtp 用于计算结果。$p$ 或 $b$ 需要是质数（或者 $1$）。
+\inputminted{cpp}{contents/numbertheory/quadres.cpp}
+
 \section{Math}
 
 \subsection{拉格朗日反演}
@@ -453,8 +457,11 @@ $O(n \log n)$ 预处理，$O(1)$ 查询。
 \subsection{线段}
 \inputminted{cpp}{contents/geometry/线段.cpp}
 
-\subsection{多边形}
-\inputminted{cpp}{contents/geometry/多边形.cpp}
+\subsection{简单多边形}
+\inputminted{cpp}{contents/geometry/简单多边形.cpp}
+
+\subsection{简单多边形三角剖分}
+\inputminted{cpp}{contents/geometry/简单多边形三角剖分.cpp}
 
 \subsection{线段 in 多边形}
 \inputminted{cpp}{contents/geometry/seg_in_polygon.cpp}
