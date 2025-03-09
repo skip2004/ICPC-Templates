@@ -7,12 +7,20 @@ bool quadresnaive(u64 a, u64 b) {
 	for(int i = 0;i < b;++i) if(i * i % b == a) return 1;
 	return 0;
 }
+bool quadresnaive2(u64 a, u64 b) {
+	int ans = 1;
+	for(int k = 1;k <= b / 2;++k) {
+		ans ^= k * a % b > b / 2;
+	}
+	return ans;
+}
 bool quadres(u64 a, u64 b) {
 	if(a <= 1) return 1;
 	for(;a % 4 == 0;) a /= 4;
 	if(a % 2) return (a % 4 == 1 || b % 4 == 1) == quadres(b % a, a);
 	return (b % 8 == 1 || b % 8 == 7) == quadres(a / 2, b);
 }
+
 int sqrtp(int x, int p) {
 	if(x <= 1) return x;
 	static std::mt19937_64 gen;
@@ -36,7 +44,12 @@ int main() {
 		int np = 0;
 		for(int x = 2;x < b;++x) if(b % x == 0) np = 1;
 		if(np) continue;
+		if(b > 2) assert(quadres(b-1, b) == (b % 4 == 1));
+		if(b > 2) assert(quadres(2, b) == (b % 8 == 1 || b % 8 == 7));
+		if(b > 3) assert(quadres(3, b) == (b % 12 == 1 || b % 12 == 11));
+		if(b > 5) assert(quadres(5, b) == (b % 5 == 1 || b % 5 == 4));
 		for(int i = 0;i < b;++i) {
+			assert(quadresnaive(i, b) == quadresnaive2(i, b));
 			if(quadres(i, b) != quadresnaive(i, b)) {
 				std::cerr << " wa " << i << ' ' << b << '\n';
 				return 0;

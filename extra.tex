@@ -1,0 +1,111 @@
+% xelatex -shell-escape main.tex
+\documentclass[landscape, twocolumn, a4paper]{article}
+\usepackage{graphicx, amssymb, amsmath, textcomp, booktabs}
+\usepackage[libertine,vvarbb]{newtxmath}
+\usepackage[scr=rsfso]{mathalfa}
+\usepackage[T1]{fontenc} % best for Western European languages
+\usepackage{minted}
+\usepackage{listings, color, setspace, titlesec, fancyhdr, mdframed, multicol}
+\usepackage{ucharclasses}
+\usepackage{xunicode, xltxtra}
+\usepackage[inner=1.35cm, outer=0.9cm, top=1.3cm, bottom=1.3cm]{geometry}
+\usepackage{pdfpages}
+\usepackage{tocloft}
+\usepackage{nameref}
+\usepackage{verbatim}
+\usepackage{relsize}
+\usepackage{fontspec}
+\usepackage[colorlinks, linkcolor = black]{hyperref}
+\usepackage[table]{xcolor}
+\usepackage{tabularx}
+\usepackage{xeCJK}
+\usepackage{multirow}
+\usepackage{svg}
+\usepackage{attachfile}
+\usepackage{accsupp}
+
+\newcommand\emptyaccsupp[1]{\BeginAccSupp{ActualText={}}#1\EndAccSupp{}}
+%default definition is: \def\theFancyVerbLine{\rmfamily\tiny\arabic{FancyVerbLine}}
+\let\theHFancyVerbLine\theFancyVerbLine% don't apply our patch to hyperref's version
+\def\theFancyVerbLine{\rmfamily\tiny\emptyaccsupp{\arabic{FancyVerbLine}}}
+% configure fonts
+
+
+\setCJKmainfont{SimHei}[Scale=0.8]
+\setCJKmonofont{SimHei}[Scale=0.8]
+\setCJKsansfont{KaiTi}[Scale=0.8]
+
+\setmainfont{Linux Libertine O}[Scale=0.925]
+\setmonofont[Path=font/]{FiraCode-Regular}[Scale=0.8]
+
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt
+
+\titlespacing*{\section}{0pt}{-1\baselineskip}{0.0\baselineskip}
+\titlespacing*{\subsection}{0pt}{-1\baselineskip}{0.0\baselineskip}
+\titlespacing*{\subsubsection}{0pt}{-1\baselineskip}{0.0\baselineskip}
+
+\setlength{\abovecaptionskip}{0pt}
+\setlength{\belowcaptionskip}{0pt}
+
+\abovedisplayshortskip=0pt
+\belowdisplayshortskip=0pt
+\abovedisplayskip=0pt
+\belowdisplayskip=0pt
+
+\setlength{\parskip}{0pt}
+
+\date{}
+
+
+\setminted[py]{
+	style=xcode,
+	mathescape,
+	linenos,
+	autogobble,
+	baselinestretch=0.8,
+	tabsize=3,
+	fontsize=\normalsize,
+	frame=single,
+	framesep=1mm,
+	framerule=0.3pt,
+	numbersep=1mm,
+	breaklines=true,
+	breaksymbolsepleft=2pt,
+	breakbytoken=false,
+	showtabs=true,
+	tab={\relscale{0.6} $\big\vert \ \ \ $ \relscale{1}},
+}
+\setminted[cpp]{
+	style=xcode,
+	mathescape,
+	linenos,
+	autogobble,
+	baselinestretch=0.8,
+	tabsize=3,
+	fontsize=\normalsize,
+	frame=single,
+	framesep=1mm,
+	framerule=0.3pt,
+	numbersep=1mm,
+	breaklines=true,
+	breaksymbolsepleft=2pt,
+	breaksymbolleft=,
+	breakbytoken=false,
+	showtabs=true,
+	tab={\relscale{0.6} $\big\vert \ \ \ $ \relscale{1}},
+}
+
+
+\begin{document}
+
+\subsection{增量更新}
+\pagestyle{fancy}
+    % \lhead{\large Peking University-Let it Rot}
+    \rhead{\Huge \thepage}
+
+
+
+
+
+\end{document}

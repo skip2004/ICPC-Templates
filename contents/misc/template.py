@@ -6,6 +6,11 @@ print(math.comb(10, 5), math.factorial(10))
 print(math.gcd(3, 6, 9), math.gcd(16, 12))
 print(math.lcm(4, 6, 9), math.lcm(4, 8))
 print(math.isqrt(5))
+from fractions import Fraction
+a=Fraction(math.e).limit_denominator(10) # 返回分母不超过 10 的最近分数， default=1e6
+u,v=a.as_integer_ratio()
+u,v=a.numerator,a.denominator # 和上面一样
+print(u,'/',v)
 from decimal import*
 getcontext().prec = 100 #default=28
 a, b = Decimal(114), Decimal('514')
