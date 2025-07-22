@@ -1,113 +1,20 @@
 % xelatex -shell-escape main.tex
 \documentclass[landscape, twocolumn, a4paper]{article}
-\usepackage{graphicx, amssymb, amsmath, textcomp, booktabs}
-\usepackage[libertine,vvarbb]{newtxmath}
-\usepackage[scr=rsfso]{mathalfa}
-\usepackage[T1]{fontenc} % best for Western European languages
-\usepackage{minted}
-\usepackage{listings, color, setspace, titlesec, fancyhdr, mdframed, multicol}
-\usepackage{ucharclasses}
-\usepackage{xunicode, xltxtra}
-\usepackage[inner=1.35cm, outer=0.9cm, top=1.3cm, bottom=1.3cm]{geometry}
-\usepackage{pdfpages}
-\usepackage{tocloft}
-\usepackage{nameref}
-\usepackage{verbatim}
-\usepackage{relsize}
-\usepackage{fontspec}
-\usepackage[colorlinks, linkcolor = black]{hyperref}
-\usepackage[table]{xcolor}
-\usepackage{tabularx}
-\usepackage{xeCJK}
-\usepackage{multirow}
-\usepackage{svg}
-\usepackage{attachfile}
-\usepackage{accsupp}
 
-\newcommand\emptyaccsupp[1]{\BeginAccSupp{ActualText={}}#1\EndAccSupp{}}
-%default definition is: \def\theFancyVerbLine{\rmfamily\tiny\arabic{FancyVerbLine}}
-\let\theHFancyVerbLine\theFancyVerbLine% don't apply our patch to hyperref's version
-\def\theFancyVerbLine{\rmfamily\tiny\emptyaccsupp{\arabic{FancyVerbLine}}}
-% configure fonts
-
-
-\setCJKmainfont{SimHei}[Scale=0.8]
-\setCJKmonofont{SimHei}[Scale=0.8]
-\setCJKsansfont{KaiTi}[Scale=0.8]
-
-\setmainfont{Linux Libertine O}[Scale=0.925]
-\setmonofont[Path=font/]{FiraCode-Regular}[Scale=0.8]
-
-\XeTeXlinebreaklocale "zh"
-\XeTeXlinebreakskip = 0pt plus 1pt
-
-\titlespacing*{\section}{0pt}{0\baselineskip}{0.0\baselineskip}
-\titlespacing*{\subsection}{0pt}{0\baselineskip}{0.0\baselineskip}
-\titlespacing*{\subsubsection}{0pt}{0\baselineskip}{0.0\baselineskip}
-
-\setlength{\abovecaptionskip}{0pt}
-\setlength{\belowcaptionskip}{0pt}
-
-\abovedisplayshortskip=0pt
-\belowdisplayshortskip=0pt
-\abovedisplayskip=0pt
-\belowdisplayskip=0pt
-
-\setlength{\parskip}{0pt}
-
-\date{}
-
-
-\setminted[py]{
-	style=xcode,
-	mathescape,
-	linenos,
-	autogobble,
-	baselinestretch=0.8,
-	tabsize=3,
-	fontsize=\normalsize,
-	frame=single,
-	framesep=1mm,
-	framerule=0.3pt,
-	numbersep=1mm,
-	breaklines=true,
-	breaksymbolsepleft=2pt,
-	breakbytoken=false,
-	showtabs=true,
-	tab={\relscale{0.6} $\big\vert \ \ \ $ \relscale{1}},
-}
-\setminted[cpp]{
-	style=xcode,
-	mathescape,
-	linenos,
-	autogobble,
-	baselinestretch=0.8,
-	tabsize=3,
-	fontsize=\normalsize,
-	frame=single,
-	framesep=1mm,
-	framerule=0.3pt,
-	numbersep=1mm,
-	breaklines=true,
-	breaksymbolsepleft=2pt,
-	breaksymbolleft=,
-	breakbytoken=false,
-	showtabs=true,
-	tab={\relscale{0.6} $\big\vert \ \ \ $ \relscale{1}},
-}
-
+\input{config.tex}
 
 \begin{document}
 \begin{titlepage}
 \onecolumn
-\begin{figure*}[h]
-	\centering
-	\includegraphics[scale=0.5]{others/Peking_University_logo.png}
-\end{figure*}
-
-\begin{center}
-	\Huge 这是封面
-\end{center}
+% \begin{figure*}[h]
+% 	\centering
+% 	\includegraphics[scale=0.5]{others/Peking_University_logo.png}
+% \end{figure*}
+% 
+% 
+% \begin{center}
+% 	\Huge 这是封面
+% \end{center}
 
 %\begin{center}
 %    \includesvg{name/r.svg}
@@ -155,163 +62,60 @@
 \section{图论}
 
 \subsection{二分图匹配}
-\subsubsection{\href{run:./contents/graph/matching/dfs-matching.cpp}{二分图最大匹配 | 最小边覆盖}}
-左到右连单向边，时间复杂度 $O(M|match|)$。
+\codesectiondesc{\subsubsection}{cpp}{contents/graph/matching/dfs-matching.cpp}{二分图最大匹配 | 最小边覆盖}{左到右连单向边，时间复杂度 $O(M|match|)$。}
 
-\inputminted{cpp}{contents/graph/matching/dfs-matching.cpp}
+\codesectiondesc{\subsubsection}{cpp}{contents/graph/matching/bitset-dfs-matching.cpp}{二分图最大匹配 (bitset 优化)}{左到右连单向边，时间复杂度 $O(n^2/w\ |match|)$。}
 
-\subsubsection{\href{run:./contents/graph/matching/bitset-dfs-matching.cpp}{二分图最大匹配 (bitset 优化)}}
-左到右连单向边，时间复杂度 $O(n^2/w\ |match|)$。
+\codesectiondesc{\subsubsection}{cpp}{contents/graph/matching/HK.cpp}{二分图最大匹配 (Hopcroft-Karp) \& 最小边覆盖}{左到右单向边，时间复杂度 $O(M \sqrt{|match|})$}
 
-\inputminted{cpp}{contents/graph/matching/bitset-dfs-matching.cpp}
-
-\subsubsection{\href{run:./contents/graph/matching/HK.cpp}{二分图最大匹配 (Hopcroft-Karp) \& 最小边覆盖}}
-左到右单向边，时间复杂度 $O(M \sqrt{|match|})$
-
-\inputminted{cpp}{contents/graph/matching/HK.cpp}
-
-\subsubsection{\href{run:./contents/graph/matching/KM.cpp}{二分图最小权匹配}}
-
-返回左边每个点匹配的右边点的编号，左边的点不多于右边的点（必要时补点）。
-
-\inputminted{cpp}{contents/graph/matching/KM.cpp}
+\codesectiondesc{\subsubsection}{cpp}{contents/graph/matching/KM.cpp}{二分图最小权匹配}{返回左边每个点匹配的右边点的编号，左边的点不多于右边的点（必要时补点）。}
 
 最小权匹配。返回代价和、右边每个点匹配的左边点的编号、对应的边权。过程中能计算出匹配为 $0 \cdots |match|$ 的最优解。
-
 时间复杂度 $O(|match|(L^2+|E|))$。
 \inputminted{cpp}{contents/graph/matching/newkm.cpp}
 
-\subsection{\href{run:./contents/graph/dinic.cpp}{网络最大流 (dinic)}}
-\inputminted{cpp}{contents/graph/dinic.cpp}
+\codesectiondesc{\subsection}{cpp}{contents/graph/dinic.cpp}{网络最大流 (dinic)}{}
 
-\subsection{\href{run:./contents/graph/MCMF.cpp}{最小费用流}}
-\inputminted{cpp}{contents/graph/MCMF.cpp}
+\codesectiondesc{\subsection}{cpp}{contents/graph/MCMF.cpp}{最小费用流}{}
 
-\subsection{\href{run:./contents/graph/带花树.cpp}{一般图最大匹配 (带花树)}}
-edge 里存双向边。运行结束后 match 存放每个点匹配的点的编号，如果没有匹配则为 $0$。
-\inputminted{cpp}{contents/graph/带花树.cpp}
+\codesectiondesc{\subsection}{cpp}{contents/graph/带花树.cpp}{一般图最大匹配 (带花树)}{edge 里存双向边。运行结束后 match 存放每个点匹配的点的编号，如果没有匹配则为 $0$。}
 
-\subsection{\href{run:./contents/graph/D-MST.cpp}{最小树形图}}
+\codesectiondesc{\subsection}{cpp}{contents/graph/D-MST.cpp}{最小树形图}{用 DMST::link 添加边，然后调用 DMST::solve(root) 得到最小树形图边的集合，如果没有合法解会返回空集 (注意 $n=1$)。}
 
-用 DMST::link 添加边，然后调用 DMST::solve(root) 得到最小树形图边的集合，如果没有合法解会返回空集 (注意 $n=1$)。
+\codesectiondesc{\subsection}{cpp}{contents/graph/kosaraju.cpp}{强连通分量 (kosaraju)}{e 存有向边，re 里存反向边。用 solve 得到所有强连通分量。时间复杂度 $O(\frac{n^2}{w})$。}
 
-\inputminted{cpp}{contents/graph/D-MST.cpp}
+\codesectiondesc{\subsection}{cpp}{contents/graph/eulerwalk.cpp}{欧拉回路/欧拉路径}{如果是无向图，两个方向都连边，id 相同。不同的边 id 不同且在 $[1, m]$ 里。 \par src 是起点，如果是欧拉路径，找一个度数为奇数(无向图)/出度大于入度(有向图)的点作为 src，如果是回路，选一个度数非零的点作为 src。 \par 如果有解，求出路径是 $s$，那么返回 $[(s_1 = src, -1), (s_2, id(s_1 \rightarrow s_2)), \ldots, (s_n, id(s_{n-1} \rightarrow s_n))]$，如果是回路，那么 $s_n = s_1 = src$。无解则返回空集。}
 
-\subsection{\href{run:./contents/graph/kosaraju.cpp}{强连通分量 (kosaraju)}}
-
-e 存有向边，re 里存反向边。用 solve 得到所有强连通分量。时间复杂度 $O(\frac{n^2}{w})$。
-
-\inputminted{cpp}{contents/graph/kosaraju.cpp}
-
-\subsection{\href{run:./contents/graph/eulerwalk.cpp}{欧拉回路/欧拉路径}}
-
-如果是无向图，两个方向都连边，id 相同。不同的边 id 不同且在 $[1, m]$ 里。
-
-src 是起点，如果是欧拉路径，找一个度数为奇数(无向图)/出度大于入度(有向图)的点作为 src，如果是回路，选一个度数非零的点作为 src。
-
-如果有解，求出路径是 $s$，那么返回 $[(s_1 = src, -1), (s_2, id(s_1 \rightarrow s_2)), \ldots, (s_n, id(s_{n-1} \rightarrow s_n))]$，如果是回路，那么 $s_n = s_1 = src$。无解则返回空集。
-
-\inputminted{cpp}{contents/graph/eulerwalk.cpp}
-
-\subsection{\href{run:./contents/graph/支配树.cpp}{支配树}}
-\inputminted{cpp}{contents/graph/支配树.cpp}
+\codesectiondesc{\subsection}{cpp}{contents/graph/支配树.cpp}{支配树}{}
 
 % \subsection{缩点 | Tarjan} % !!! pb
 % \inputminted{cpp}{contents/graph/tarjan.cpp}
-% 
-% \subsection{缩点 | 点双} % !!! pb
-% \inputminted{cpp}{contents/graph/tarjan_vertex.cpp}
-% 
-% \subsection{缩点 | 边双} % !!! pb
-% \inputminted{cpp}{contents/graph/tarjan_edge.cpp}
-% 
-% \subsection{仙人掌}
-% \inputminted{cpp}{contents/graph/cactus.cpp}
-% 
-% \subsection{2-Sat}
-% \inputminted{cpp}{contents/graph/2-sat.cpp}
-% 
-% 
-% \subsection{三/四元环}
-% \inputminted{cpp}{contents/graph/34cycle.cpp}
-% 
-% \subsection{双极定向}
-% \inputminted{cpp}{contents/graph/双极定向.cpp}
+% ... (omitted commented out sections)
+
 \subsection{Tree And Graph}
 \input{contents/graph/TreeAndGraph.tex}
 
-% \subsection{拟阵交}
-% \inputminted{cpp}{contents/graph/拟阵交.cpp}
-% x
-
 \section{数论}	
 
-\subsection{\href{run:./contents/numbertheory/approx.cpp}{取模还原分数}}
-\inputminted{cpp}{contents/numbertheory/approx.cpp}
+\codesectiondesc{\subsection}{cpp}{contents/numbertheory/approx.cpp}{取模还原分数}{}
 
-\subsection{\href{run:./contents/numbertheory/exgcd.cpp}{扩展欧几里得}}
-结果的 $x, y$ 满足：$ax + by = \gcd(a, b)$; 若 $a, b$ 非 $0$，则： $-b \leq x \leq b, -a \leq y \leq a$。
+\codesectiondesc{\subsection}{cpp}{contents/numbertheory/exgcd.cpp}{扩展欧几里得}{结果的 $x, y$ 满足：$ax + by = \gcd(a, b)$; 若 $a, b$ 非 $0$，则： $-b \leq x \leq b, -a \leq y \leq a$。}
 
-\inputminted{cpp}{contents/numbertheory/exgcd.cpp}
+\codesectiondesc{\subsection}{cpp}{contents/numbertheory/Euclid.cpp}{万能欧几里得}{}
 
-\subsection{\href{run:./contents/numbertheory/Euclid.cpp}{万能欧几里得}}
-\inputminted{cpp}{contents/numbertheory/Euclid.cpp}
+\codesectiondesc{\subsection}{cpp}{contents/numbertheory/floor_sum.cpp}{floor-sum}{$n < 2 ^ {32}, 1 \leq m < 2 ^ {32}$ \par $$ result=\sum_{i=0}^{n-1} \lfloor \frac{ai + b}{m} \rfloor \pmod{2^{63}} $$}
 
-\subsection{\href{run:./contents/numbertheory/floor_sum.cpp}{floor-sum}}
-$n < 2 ^ {32}, 1 \leq m < 2 ^ {32}$
+\codesectiondesc{\subsection}{cpp}{contents/numbertheory/minmod.cpp}{Min of Mod of Linear}{$$ result=\min_{0 \leq i < n} \{ (a i + b) \% m \} $$}
 
-$$
-result=\sum_{i=0}^{n-1} \lfloor \frac{ai + b}{m} \rfloor \pmod{2^{63}}
-$$
+\codesectiondesc{\subsection}{cpp}{contents/numbertheory/sbt.cpp}{Stern-Brocot Tree 二分}{}
 
-\inputminted{cpp}{contents/numbertheory/floor_sum.cpp}
+\codesectiondesc{\subsection}{cpp}{contents/numbertheory/CRT.cpp}{中国剩余定理}{返回满足 $x \equiv a_i \pmod{m_i} (i = 1, 2)$ 的最小非负整数 $x$，若无解则返回 $-1$。}
 
-\subsection{\href{run:./contents/numbertheory/minmod.cpp}{Min of Mod of Linear}}
-$$
-result=\min_{0 \leq i < n} \{ (a i + b) \% m \}
-$$
+\codesectiondesc{\subsection}{cpp}{contents/numbertheory/Miller_Rabin.cpp}{Miller-Rabin}{调用 checkprime 判断是否为质数。}
 
-\inputminted{cpp}{contents/numbertheory/minmod.cpp}
+\codesectiondesc{\subsection}{cpp}{contents/numbertheory/pollard_rho.cpp}{Pollard-rho}{调用 factor 获得 $x$ 质因子的可重集合（已从小到大排序）。}
 
-\subsection{\href{run:./contents/numbertheory/sbt.cpp}{Stern-Brocot Tree 二分}}
-\inputminted{cpp}{contents/numbertheory/sbt.cpp}
-
-\subsection{\href{run:./contents/numbertheory/CRT.cpp}{中国剩余定理}}
-返回满足 $x \equiv a_i \pmod{m_i} (i = 1, 2)$ 的最小非负整数 $x$，若无解则返回 $-1$。
-
-\inputminted{cpp}{contents/numbertheory/CRT.cpp}
-
-\subsection{\href{run:./contents/numbertheory/Miller_Rabin.cpp}{Miller-Rabin}}
-
-调用 checkprime 判断是否为质数。
-
-\inputminted{cpp}{contents/numbertheory/Miller_Rabin.cpp}
-
-\subsection{\href{run:./contents/numbertheory/pollard_rho.cpp}{Pollard-rho}}
-
-调用 factor 获得 $x$ 质因子的可重集合（已从小到大排序）。
-
-\inputminted{cpp}{contents/numbertheory/pollard_rho.cpp}
-
-\subsection{\href{run:./contents/numbertheory/quadres.cpp}{二次剩余}}
-quadres 用于判断是否存在二次剩余，sqrtp 用于计算结果。$p$ 或 $b$ 需要是质数（或者 $1$）。
-
-高斯引理： 
-$$
-\left( \frac{a}{p} \right) = (-1)^{\sum_{i=1}^{\frac{p-1}{2}} \mathbf{1}[(ai \bmod p) > p/2]}
-$$
-
-推论：
-$$
-\begin{cases}
-\left( \frac{-1}{p} \right) = 1 & \Leftrightarrow p \equiv 1 \pmod{4}, \\
-\left( \frac{2}{p} \right) = 1 & \Leftrightarrow p \equiv \pm 1 \pmod{8}, \\
-\left( \frac{3}{p} \right) = 1 & \Leftrightarrow p \equiv \pm 1 \pmod{12}, \\
-\left( \frac{5}{p} \right) = 1 & \Leftrightarrow p \equiv \pm 1 \pmod{5}.
-\end{cases}
-$$
-
-\inputminted{cpp}{contents/numbertheory/quadres.cpp}
+\codesectiondesc{\subsection}{cpp}{contents/numbertheory/quadres.cpp}{二次剩余}{quadres 用于判断是否存在二次剩余，sqrtp 用于计算结果。$p$ 或 $b$ 需要是质数（或者 $1$）。\par 高斯引理： $$ \left( \frac{a}{p} \right) = (-1)^{\sum_{i=1}^{\frac{p-1}{2}} \mathbf{1}[(ai \bmod p) > p/2]} $$ \par 推论： $$ \begin{cases} \left( \frac{-1}{p} \right) = 1 & \Leftrightarrow p \equiv 1 \pmod{4}, \\ \left( \frac{2}{p} \right) = 1 & \Leftrightarrow p \equiv \pm 1 \pmod{8}, \\ \left( \frac{3}{p} \right) = 1 & \Leftrightarrow p \equiv \pm 1 \pmod{12}, \\ \left( \frac{5}{p} \right) = 1 & \Leftrightarrow p \equiv \pm 1 \pmod{5}. \end{cases} $$}
 
 \section{Math}
 
@@ -329,223 +133,99 @@ $$
 \prod_{i \ge 1} (1 - x ^ i)= \sum_{k = -\infty} ^ {\infty} (-1) ^ k x ^ {\frac{k(3k-1)}{2}}
 $$
 
-\subsection{\href{run:./contents/math/FFT.cpp}{Fast Fourier Transform}}
-\inputminted{cpp}{contents/math/FFT.cpp}
+\codesectiondesc{\subsection}{cpp}{contents/math/FFT.cpp}{Fast Fourier Transform}{}
 
-\subsection{\href{run:./contents/math/NTT.cpp}{Number Theoretic Transform}}
-\inputminted{cpp}{contents/math/NTT.cpp}
+\codesectiondesc{\subsection}{cpp}{contents/math/NTT.cpp}{Number Theoretic Transform}{}
 
-\subsection{\href{run:./contents/math/GF_noExp.cpp}{Generating function}}
-\inputminted{cpp}{contents/math/GF_noExp.cpp}
+\codesectiondesc{\subsection}{cpp}{contents/math/GF_noExp.cpp}{Generating function}{}
 
-\subsection{\href{run:./contents/math/online_convolution.cpp}{全在线卷积}}
-\inputminted{cpp}{contents/math/online_convolution.cpp}
+\codesectiondesc{\subsection}{cpp}{contents/math/online_convolution.cpp}{全在线卷积}{}
 
 \subsection{常系数线性递推}
 
-\subsubsection{\href{run:./contents/math/BM.cpp}{Berlekamp Massey}}
-返回最短的 $c$ 使得： $\forall n \geq size(c) : a_n = \sum_{i=0}^{size(c)-1} c_i a_{n-1-i}$
-\inputminted{cpp}{contents/math/BM.cpp}
+\codesectiondesc{\subsubsection}{cpp}{contents/math/BM.cpp}{Berlekamp Massey}{返回最短的 $c$ 使得： $\forall n \geq size(c) : a_n = \sum_{i=0}^{size(c)-1} c_i a_{n-1-i}$}
 
-\subsubsection{\href{run:./contents/math/线性递推形式转换.cpp}{递推式转分式}}
-$$
-a_i = \sum_{j=1}^{d} c_j a_{i-j}, i \geq d \Leftrightarrow a_i = \left\lbrack x^i \right\rbrack \frac{p(x)}{q(x)}
-$$
-\inputminted{cpp}{contents/math/线性递推形式转换.cpp}
+\codesectiondesc{\subsubsection}{cpp}{contents/math/线性递推形式转换.cpp}{递推式转分式}{$$ a_i = \sum_{j=1}^{d} c_j a_{i-j}, i \geq d \Leftrightarrow a_i = \left\lbrack x^i \right\rbrack \frac{p(x)}{q(x)} $$}
 
-\subsubsection{\href{run:./contents/math/bostan_mori.cpp}{Bostan–Mori}}
-$$ \left\lbrack x^k\right\rbrack \frac{p(x)}{q(x)} $$
+\codesectiondesc{\subsubsection}{cpp}{contents/math/bostan_mori.cpp}{Bostan–Mori}{$$ \left\lbrack x^k\right\rbrack \frac{p(x)}{q(x)} $$}
 
-\inputminted{cpp}{contents/math/bostan_mori.cpp}
+\codesectiondesc{\subsubsection}{cpp}{contents/math/Fiduccia.cpp}{远处区间值}{$$ \left\lbrack x^{\left\lbrack k,k+m\right)}\right\rbrack \frac{p(x)}{q(x)}$$ \par 如果 $deg(p) \geq deg(q)$, 请使用 solve\_x，不然可以直接使用 solve。}
 
-\subsubsection{\href{run:./contents/math/Fiduccia.cpp}{远处区间值}}
-$$ \left\lbrack x^{\left\lbrack k,k+m\right)}\right\rbrack \frac{p(x)}{q(x)}$$
+\codesectiondesc{\subsection}{cpp}{contents/math/LP.cpp}{线性规划 (单纯形法)}{$x[1\cdots n]$ 是变量，$a[1\cdots m][\cdots]$ 是约束。\par 所有约束为： $$ \begin{aligned} \forall i \in [1, m] &: a[i][0] + \sum_{j=1}^{n} a[i][j] x[j] \geq 0 \\ \forall j \in [1, n] &: x[j] \geq 0 \end{aligned} $$ \par 最大化 $$ \sum_{j=1}^{n} a[0][j] x[j] $$ \par 如果无解返回 nan，如果无界返回 inf。最后的 $x$ 里存放的是最优解。}
 
-如果 $deg(p) \geq deg(q)$, 请使用 solve\_x，不然可以直接使用 solve。
-
-\inputminted{cpp}{contents/math/Fiduccia.cpp}
-
-\subsection{\href{run:./contents/math/LP.cpp}{线性规划 (单纯形法)}}
-$x[1\cdots n]$ 是变量，$a[1\cdots m][\cdots]$ 是约束。
-
-所有约束为：
-$$
-\begin{aligned}
-\forall i \in [1, m] &: a[i][0] + \sum_{j=1}^{n} a[i][j] x[j] \geq 0 \\
-\forall j \in [1, n] &: x[j] \geq 0
-\end{aligned}
-$$
-
-最大化
-$$
-\sum_{j=1}^{n} a[0][j] x[j]
-$$
-
-如果无解返回 nan，如果无界返回 inf。最后的 $x$ 里存放的是最优解。
-
-\inputminted{cpp}{contents/math/LP.cpp}
-
-\subsection{\href{run:./contents/math/Goldensectionsearch.cpp}{黄金三分}}
-返回 $f$ 在 $[min(a, c), max(a, c)]$ 上的极大值点 (f 需要是单峰函数)。
-\inputminted{cpp}{contents/math/Goldensectionsearch.cpp}
+\codesectiondesc{\subsection}{cpp}{contents/math/Goldensectionsearch.cpp}{黄金三分}{返回 $f$ 在 $[min(a, c), max(a, c)]$ 上的极大值点 (f 需要是单峰函数)。}
 
 \section{字符串}
 
-\subsection{\href{run:./contents/string/SAM.cpp}{后缀自动机 SAM}}
-需要两倍点数量。
-\inputminted{cpp}{contents/string/SAM.cpp}
+\codesectiondesc{\subsection}{cpp}{contents/string/SAM.cpp}{后缀自动机 SAM}{需要两倍点数量。}
 
-\subsection{\href{run:./contents/string/PAM.cpp}{回文自动机 PAM}}
-\inputminted{cpp}{contents/string/PAM.cpp}
+\codesectiondesc{\subsection}{cpp}{contents/string/PAM.cpp}{回文自动机 PAM}{}
 
-\subsection{\href{run:./contents/string/AC自动机.cpp}{AC 自动机}}
-\inputminted{cpp}{contents/string/AC自动机.cpp}
+\codesectiondesc{\subsection}{cpp}{contents/string/AC自动机.cpp}{AC 自动机}{}
 
-\subsection{\href{run:./contents/string/SA.cpp}{SA}}
-后缀数组， $sa$ 是个 $0 \sim n-1$ 的排列，$h[i] = lcp(s[sa[i]:], s[sa[i+1]:])$。
-\inputminted{cpp}{contents/string/SA.cpp}
+\codesectiondesc{\subsection}{cpp}{contents/string/SA.cpp}{SA}{后缀数组， $sa$ 是个 $0 \sim n-1$ 的排列，$h[i] = lcp(s[sa[i]:], s[sa[i+1]:])$。}
 
-\subsection{\href{run:./contents/string/Zalgo.cpp}{Z algorithm}}
-返回的 $lcp[i] = lcp(s, s[i:])$。
-\inputminted{cpp}{contents/string/Zalgo.cpp}
+\codesectiondesc{\subsection}{cpp}{contents/string/Zalgo.cpp}{Z algorithm}{返回的 $lcp[i] = lcp(s, s[i:])$。}
 
-\subsection{\href{run:./contents/string/manacher.cpp}{Manacher}}
-返回每个回文中心的回文半径大小，奇偶分开考虑。
-\inputminted{cpp}{contents/string/manacher.cpp}
+\codesectiondesc{\subsection}{cpp}{contents/string/manacher.cpp}{Manacher}{返回每个回文中心的回文半径大小，奇偶分开考虑。}
 
-\subsection{\href{run:./contents/string/minrep.cpp}{最小表示法}}
-返回 $s$ 的最小表示的起始位置。可以用 rotate 算出最小表示的字符串。
-\inputminted{cpp}{contents/string/minrep.cpp}
+\codesectiondesc{\subsection}{cpp}{contents/string/minrep.cpp}{最小表示法}{返回 $s$ 的最小表示的起始位置。可以用 rotate 算出最小表示的字符串。}
 
-\subsection{\href{run:./contents/string/lyndon.cpp}{Lyndon 分解}}
-\inputminted{cpp}{contents/string/lyndon.cpp}
+\codesectiondesc{\subsection}{cpp}{contents/string/lyndon.cpp}{Lyndon 分解}{}
 
 
 \section{数据结构}
-\subsection{\href{run:./contents/ds/ex-bit.cpp}{区间加区间求和 树状数组}}
-add 区间加，query 区间求和。区间都是闭区间。
-\inputminted{cpp}{contents/ds/ex-bit.cpp}
+\codesectiondesc{\subsection}{cpp}{contents/ds/ex-bit.cpp}{区间加区间求和 树状数组}{add 区间加，query 区间求和。区间都是闭区间。}
 
-\subsection{\href{run:./contents/ds/zkw-sgt.cpp}{zkw 线段树}}
-单点修改区间半群。如果半群没有单位元可以用 qry2。
-\inputminted{cpp}{contents/ds/zkw-sgt.cpp}
+\codesectiondesc{\subsection}{cpp}{contents/ds/zkw-sgt.cpp}{zkw 线段树}{单点修改区间半群。如果半群没有单位元可以用 qry2。}
 
-\subsection{\href{run:./contents/ds/rangequery.cpp}{静态区间半群}}
-$O(n \log n)$ 预处理，$O(1)$ 查询。
-\inputminted{cpp}{contents/ds/rangequery.cpp}
+\codesectiondesc{\subsection}{cpp}{contents/ds/rangequery.cpp}{静态区间半群}{$O(n \log n)$ 预处理，$O(1)$ 查询。}
 
-\subsection{\href{run:./contents/ds/LCT.cpp}{Link Cut Tree}}
-\inputminted{cpp}{contents/ds/LCT.cpp}
+\codesectiondesc{\subsection}{cpp}{contents/ds/LCT.cpp}{Link Cut Tree}{}
 
-\subsection{\href{run:./contents/ds/btrie.cpp}{压位 Trie}}
-\inputminted{cpp}{contents/ds/btrie.cpp}
+\codesectiondesc{\subsection}{cpp}{contents/ds/btrie.cpp}{压位 Trie}{}
 
-% \subsection{FHQ Treap} % !!! pb
-% \inputminted{cpp}{contents/ds/fhq.cpp}
-
-\subsection{\href{run:./contents/ds/pbds_tree.cpp}{pbds tree}}
-\inputminted{cpp}{contents/ds/pbds_tree.cpp}
+\codesectiondesc{\subsection}{cpp}{contents/ds/pbds_tree.cpp}{pbds tree}{}
 
 
 \section{geometry}
-\subsection{\href{run:./contents/geometry/向量.cpp}{向量}}
-\inputminted{cpp}{contents/geometry/向量.cpp}
-
-\subsection{\href{run:./contents/geometry/centers.cpp}{三角形各心}}
-\inputminted{cpp}{contents/geometry/centers.cpp}
-
-\subsection{\href{run:./contents/geometry/直线半平面.cpp}{直线半平面}}
-\inputminted{cpp}{contents/geometry/直线半平面.cpp}
-
-\subsection{\href{run:./contents/geometry/半平面交.cpp}{半平面交}}
-\inputminted{cpp}{contents/geometry/半平面交.cpp}
-
-\subsection{\href{run:./contents/geometry/线段.cpp}{线段}}
-\inputminted{cpp}{contents/geometry/线段.cpp}
-
-\subsection{\href{run:./contents/geometry/简单多边形.cpp}{简单多边形}}
-\inputminted{cpp}{contents/geometry/简单多边形.cpp}
-
-\subsection{\href{run:./contents/geometry/简单多边形三角剖分.cpp}{简单多边形三角剖分}}
-\inputminted{cpp}{contents/geometry/简单多边形三角剖分.cpp}
-
-\subsection{\href{run:./contents/geometry/seg_in_polygon.cpp}{线段 in 多边形}}
-\inputminted{cpp}{contents/geometry/seg_in_polygon.cpp}
-
-\subsection{\href{run:./contents/geometry/图形交.cpp}{图形求交}}
-\inputminted{cpp}{contents/geometry/图形交.cpp}
-
-\subsection{\href{run:./contents/geometry/凸包.cpp}{凸包}}
-结果为逆时针。
-\inputminted{cpp}{contents/geometry/凸包.cpp}
-
-\subsection{\href{run:./contents/geometry/上凸壳.cpp}{上凸壳}}
-结果显然为顺时针。
-\inputminted{cpp}{contents/geometry/上凸壳.cpp}
-
-\subsection{\href{run:./contents/geometry/最小圆覆盖.cpp}{最小圆覆盖}}
-\inputminted{cpp}{contents/geometry/最小圆覆盖.cpp}
-
-\subsection{\href{run:./contents/geometry/最近点对.cpp}{最近点对}}
-\inputminted{cpp}{contents/geometry/最近点对.cpp}
-
-\subsection{\href{run:./contents/geometry/凸包直径.cpp}{凸包直径}}
-\inputminted{cpp}{contents/geometry/凸包直径.cpp}
-% https://codeforces.com/blog/entry/48868?#comment-329264
-
-\subsection{\href{run:./contents/geometry/切凸包.cpp}{切凸包}}
-\inputminted{cpp}{contents/geometry/切凸包.cpp}
-
-\subsection{\href{run:./contents/geometry/voronoi.cpp}{V 图}}
-\inputminted{cpp}{contents/geometry/voronoi.cpp}
-
-\subsection{\href{run:./contents/geometry/Delaunay.cpp}{Delaunay 三角剖分}}
-\inputminted{cpp}{contents/geometry/Delaunay.cpp}
+\codesectiondesc{\subsection}{cpp}{contents/geometry/向量.cpp}{向量}{}
+\codesectiondesc{\subsection}{cpp}{contents/geometry/centers.cpp}{三角形各心}{}
+\codesectiondesc{\subsection}{cpp}{contents/geometry/直线半平面.cpp}{直线半平面}{}
+\codesectiondesc{\subsection}{cpp}{contents/geometry/半平面交.cpp}{半平面交}{}
+\codesectiondesc{\subsection}{cpp}{contents/geometry/线段.cpp}{线段}{}
+\codesectiondesc{\subsection}{cpp}{contents/geometry/简单多边形.cpp}{简单多边形}{}
+\codesectiondesc{\subsection}{cpp}{contents/geometry/简单多边形三角剖分.cpp}{简单多边形三角剖分}{}
+\codesectiondesc{\subsection}{cpp}{contents/geometry/seg_in_polygon.cpp}{线段 in 多边形}{}
+\codesectiondesc{\subsection}{cpp}{contents/geometry/图形交.cpp}{图形求交}{}
+\codesectiondesc{\subsection}{cpp}{contents/geometry/凸包.cpp}{凸包}{结果为逆时针。}
+\codesectiondesc{\subsection}{cpp}{contents/geometry/上凸壳.cpp}{上凸壳}{结果显然为顺时针。}
+\codesectiondesc{\subsection}{cpp}{contents/geometry/最小圆覆盖.cpp}{最小圆覆盖}{}
+\codesectiondesc{\subsection}{cpp}{contents/geometry/最近点对.cpp}{最近点对}{}
+\codesectiondesc{\subsection}{cpp}{contents/geometry/凸包直径.cpp}{凸包直径}{}
+\codesectiondesc{\subsection}{cpp}{contents/geometry/切凸包.cpp}{切凸包}{}
+\codesectiondesc{\subsection}{cpp}{contents/geometry/voronoi.cpp}{V 图}{}
+\codesectiondesc{\subsection}{cpp}{contents/geometry/Delaunay.cpp}{Delaunay 三角剖分}{}
 
 \section{geometry3d}
-\subsection{\href{run:./contents/geometry/3d/vector.cpp}{向量}}
-\inputminted{cpp}{contents/geometry/3d/vector.cpp}
-
-\subsection{\href{run:./contents/geometry/3d/plane.cpp}{平面}}
-\inputminted{cpp}{contents/geometry/3d/plane.cpp}
-
-\subsection{\href{run:./contents/geometry/3d/line.cpp}{直线}}
-\inputminted{cpp}{contents/geometry/3d/line.cpp}
-
-\subsection{\href{run:./contents/geometry/3d/convex.cpp}{凸包}}
-\inputminted{cpp}{contents/geometry/3d/convex.cpp}
+\codesectiondesc{\subsection}{cpp}{contents/geometry/3d/vector.cpp}{向量}{}
+\codesectiondesc{\subsection}{cpp}{contents/geometry/3d/plane.cpp}{平面}{}
+\codesectiondesc{\subsection}{cpp}{contents/geometry/3d/line.cpp}{直线}{}
+\codesectiondesc{\subsection}{cpp}{contents/geometry/3d/convex.cpp}{凸包}{}
 
 
 \section{Misc}
-\subsection{\href{run:./contents/misc/pragma.cpp}{Pragma}}
-\inputminted{cpp}{contents/misc/pragma.cpp}
-
-\subsection{\href{run:./contents/misc/Barrett.cpp}{Barrett}}
-\inputminted{cpp}{contents/misc/Barrett.cpp}
-
-\subsection{\href{run:./contents/misc/fastdivcheck.cpp}{快速整除判定}}
-要求 $p$ 是奇数。如果是 (u)int128，求逆循环次数要改成 $6$。
-\inputminted{cpp}{contents/misc/fastdivcheck.cpp}
-
-\subsection{\href{run:./contents/misc/lcs.cpp}{LCS}}
-\inputminted{cpp}{contents/misc/lcs.cpp}
-
-\subsection{\href{run:./contents/misc/zeller.cpp}{日期公式}}
-getday 返回自 $1/1/1$ 起到 $y/m/d$ 的天数，$1/1/1$ 是星期一，所以模 $7$ 可以得算出是周几。
-
-date 是 getday 的逆。
-\inputminted{cpp}{contents/misc/zeller.cpp}
-
-\subsection{\href{run:./contents/misc/xorshift.cpp}{Xorshift}}
-\inputminted{cpp}{contents/misc/xorshift.cpp}
+\codesectiondesc{\subsection}{cpp}{contents/misc/pragma.cpp}{Pragma}{}
+\codesectiondesc{\subsection}{cpp}{contents/misc/Barrett.cpp}{Barrett}{}
+\codesectiondesc{\subsection}{cpp}{contents/misc/fastdivcheck.cpp}{快速整除判定}{要求 $p$ 是奇数。如果是 (u)int128，求逆循环次数要改成 $6$。}
+\codesectiondesc{\subsection}{cpp}{contents/misc/lcs.cpp}{LCS}{}
+\codesectiondesc{\subsection}{cpp}{contents/misc/zeller.cpp}{日期公式}{getday 返回自 $1/1/1$ 起到 $y/m/d$ 的天数，$1/1/1$ 是星期一，所以模 $7$ 可以得算出是周几。\par date 是 getday 的逆。}
+\codesectiondesc{\subsection}{cpp}{contents/misc/xorshift.cpp}{Xorshift}{}
 
 \subsection{distributions}
 
-\subsection{\href{run:./contents/misc/template.py}{python}}
-\inputminted{py}{contents/misc/template.py}
-
-\subsection{\href{run:./contents/misc/ieee754.txt}{浮点数精度}}
-\inputminted{text}{contents/misc/ieee754.txt}
+\codesectiondesc{\subsection}{py}{contents/misc/template.py}{python}{}
+\codesectiondesc{\subsection}{text}{contents/misc/ieee754.txt}{浮点数精度}{}
 
 
 \section{配置}
@@ -610,4 +290,3 @@ STL 重构导致引用失效，
 
 
 \end{document}
-

@@ -1,5 +1,3 @@
-% xelatex -shell-escape main.tex
-\documentclass[landscape, twocolumn, a4paper]{article}
 \usepackage{graphicx, amssymb, amsmath, textcomp, booktabs}
 \usepackage[libertine,vvarbb]{newtxmath}
 \usepackage[scr=rsfso]{mathalfa}
@@ -15,7 +13,7 @@
 \usepackage{verbatim}
 \usepackage{relsize}
 \usepackage{fontspec}
-\usepackage[colorlinks, linkcolor = black]{hyperref}
+\usepackage[colorlinks, urlcolor = blue, linkcolor=black]{hyperref}
 \usepackage[table]{xcolor}
 \usepackage{tabularx}
 \usepackage{xeCJK}
@@ -23,6 +21,16 @@
 \usepackage{svg}
 \usepackage{attachfile}
 \usepackage{accsupp}
+
+\newcommand{\codesectiondesc}[5]{%
+  #1{\href{./#3}{#4}}
+  \if\relax\detokenize{#5}\relax
+  \else
+    \par #5 \par\vspace{0.5em}%
+  \fi
+  \inputminted{#2}{#3}%
+}
+
 
 \newcommand\emptyaccsupp[1]{\BeginAccSupp{ActualText={}}#1\EndAccSupp{}}
 %default definition is: \def\theFancyVerbLine{\rmfamily\tiny\arabic{FancyVerbLine}}
@@ -41,9 +49,9 @@
 \XeTeXlinebreaklocale "zh"
 \XeTeXlinebreakskip = 0pt plus 1pt
 
-\titlespacing*{\section}{0pt}{-1\baselineskip}{0.0\baselineskip}
-\titlespacing*{\subsection}{0pt}{-1\baselineskip}{0.0\baselineskip}
-\titlespacing*{\subsubsection}{0pt}{-1\baselineskip}{0.0\baselineskip}
+\titlespacing*{\section}{0pt}{0\baselineskip}{0.0\baselineskip}
+\titlespacing*{\subsection}{0pt}{0\baselineskip}{0.0\baselineskip}
+\titlespacing*{\subsubsection}{0pt}{0\baselineskip}{0.0\baselineskip}
 
 \setlength{\abovecaptionskip}{0pt}
 \setlength{\belowcaptionskip}{0pt}
@@ -97,15 +105,3 @@
 }
 
 
-\begin{document}
-
-\subsection{增量更新}
-\pagestyle{fancy}
-    % \lhead{\large Peking University-Let it Rot}
-    \rhead{\Huge \thepage}
-
-
-
-
-
-\end{document}
