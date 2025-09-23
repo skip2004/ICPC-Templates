@@ -69,10 +69,7 @@
 \codesectiondesc{\subsubsection}{cpp}{contents/graph/matching/HK.cpp}{二分图最大匹配 (Hopcroft-Karp) \& 最小边覆盖}{左到右单向边，时间复杂度 $O(M \sqrt{|match|})$}
 
 \codesectiondesc{\subsubsection}{cpp}{contents/graph/matching/KM.cpp}{二分图最小权匹配}{返回左边每个点匹配的右边点的编号，左边的点不多于右边的点（必要时补点）。}
-
-最小权匹配。返回代价和、右边每个点匹配的左边点的编号、对应的边权。过程中能计算出匹配为 $0 \cdots |match|$ 的最优解。
-时间复杂度 $O(|match|(L^2+|E|))$。
-\inputminted{cpp}{contents/graph/matching/newkm.cpp}
+\codesectiondesc{\subsubsection}{cpp}{contents/graph/matching/newkm.cpp}{二分图最小权匹配2}{ 最小权匹配。返回代价和、右边每个点匹配的左边点的编号、对应的边权。过程中能计算出匹配为 $0 \cdots |match|$ 的最优解。\par 时间复杂度 $O(|match|(L^2+|E|))$。 }
 
 \codesectiondesc{\subsection}{cpp}{contents/graph/dinic.cpp}{网络最大流 (dinic)}{}
 
@@ -140,6 +137,8 @@ $$
 \codesectiondesc{\subsection}{cpp}{contents/math/GF_noExp.cpp}{Generating function}{}
 
 \codesectiondesc{\subsection}{cpp}{contents/math/online_convolution.cpp}{全在线卷积}{}
+
+\codesectiondesc{\subsection}{cpp}{contents/math/poly-composition.cpp}{多项式复合}{ $res(x) = f(g(x)) \bmod x^n$，$g(0) = 0$, $deg(f), deg(g) < n$。}
 
 \subsection{常系数线性递推}
 
