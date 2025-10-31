@@ -1,97 +1,89 @@
-// https://www.luogu.com.cn/problem/P3376
 #include<bits/stdc++.h>
-namespace my_std{
-	using namespace std;
-	#define pii pair<int,int>
-	#define fir first
-	#define sec second
-	#define MP make_pair
-	#define rep(i,x,y) for (int i=(x);i<=(y);i++)
-	#define drep(i,x,y) for (int i=(x);i>=(y);i--)
-	#define go(x) for (int i=head[x];i;i=edge[i].nxt)
-	#define templ template<typename T>
-	typedef long long ll;
-	typedef double db;
-	mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
-	templ inline T rnd(T l,T r) {return uniform_int_distribution<T>(l,r)(rng);}
-	templ inline bool chkmax(T &x,T y){return x<y?x=y,1:0;}
-	templ inline bool chkmin(T &x,T y){return x>y?x=y,1:0;}
-	templ inline void read(T& t) {
-		t=0;char f=0,ch=getchar();double d=0.1;
-		while(ch>'9'||ch<'0') f|=(ch=='-'),ch=getchar();
-		while(ch<='9'&&ch>='0') t=t*10+ch-48,ch=getchar();
-		if(ch=='.'){ch=getchar();while(ch<='9'&&ch>='0') t+=d*(ch^48),d*=0.1,ch=getchar();}
-		t=(f?-t:t);
+using std::cin, std::cout;
+using ll = long long;
+struct maxflow {
+	int n;
+	std::vector<std::vector<std::array<int, 2>>> e;
+	std::vector<ll> f;
+	maxflow(int s) : n(s + 1), e(n) { }
+	void add(int x, int y, int v) {
+		e[x].push_back({y, (int)f.size()}); 
+		f.push_back(v);
+		e[y].push_back({x, (int)f.size()}); 
+		f.push_back(0);
 	}
-	template<typename T,typename... Args>inline void read(T& t,Args&... args){read(t); read(args...);}
-	void file() {
-		#ifdef zqj
-		freopen("a.in","r",stdin);
-		#endif
-	}
-	inline void chktime() {
-		#ifdef zqj
-		cerr<<clock()/1000.0<<'\n';
-		#endif
-	}
-	#ifdef mod
-	ll ksm(ll x,int y){ll ret=1;for (;y;y>>=1,x=x*x%mod) if (y&1) ret=ret*x%mod;return ret;}
-	ll inv(ll x){return ksm(x,mod-2);}
-	#else
-	ll ksm(ll x,int y){ll ret=1;for (;y;y>>=1,x=x*x) if (y&1) ret=ret*x;return ret;}
-	#endif
-}
-using namespace my_std;
-
-#define N 5555
-
-int n;
-// S 编号最小，T 最大，或者改一下清空
-struct Dinic {
-	struct T {
-		int to, nxt; ll v;
-	} e[N << 3];
-	int h[N], head[N], num = 1;
-	void link(int x, int y, ll v) {
-		e[++num] = {y, h[x], v}, h[x] = num;
-		e[++num] = {x, h[y], 0}, h[y] = num; // !!!
-	}
-	int dis[N];
-	bool bfs(int s, int t) {
-		std::queue<int> Q;
-		for(int i = 1;i <= n;++i) dis[i] = -1, head[i] = h[i]; //如果编号不是[S,T]，只要改这里
-		for(Q.push(t), dis[t] = 0;!Q.empty();) {
-			int x = Q.front(); Q.pop();
-			for(int i = h[x];i;i = e[i].nxt) if(e[i ^ 1].v && dis[e[i].to] < 0) {
-				dis[e[i].to] = dis[x] + 1, Q.push(e[i].to);
-			}
-		}
-		return dis[s] >= 0;
-	}
-	ll dfs(int s, int t, ll lim) {
-		if(s == t || !lim) return lim;
-		ll ans = 0, mn;
-		for(int & i = head[s];i;i = e[i].nxt) {
-			if(dis[e[i].to] + 1 == dis[s] && (mn = dfs(e[i].to, t, std::min(lim, e[i].v)))) {
-				e[i].v -= mn, e[i ^ 1].v += mn;
-				ans += mn, lim -= mn;
-				if(!lim) break;
-			}
-		}
-		return ans;
-	}
-	ll flow(int s, int t) {
+	ll flow(int s, int t, ll max = 1e18) {
 		ll ans = 0;
-		for(;bfs(s, t);) ans += dfs(s, t, 1e18);
+		std::vector<int> dis(n), h(n);
+		for(;ans < max;) {
+			for(int i = 0;i < n;++i) dis[i] = -1, h[i] = e[i].size() - 1;
+			std::queue<int> q;
+			for(q.push(t), dis[t] = 0;q.size();) {
+				int x = q.front(); q.pop();
+				for(auto [y, id] : e[x]) if(dis[y] < 0 && f[id ^ 1]) {
+					dis[y] = dis[x] + 1, q.push(y);
+					if(y == s) break;
+				}
+			}
+			if(dis[s] < 0) break;
+			auto dfs = [&](auto dfs, int s, ll l) {
+				if(s == t) return l;
+				ll ans = 0;
+				for(int & i = h[s];i >= 0;--i) {
+					auto [y, id] = e[s][i];
+					if(dis[y] + 1 != dis[s] || !f[id]) continue;
+					ll w = dfs(dfs, y, std::min(l - ans, f[id]));
+					f[id] -= w, f[id ^ 1] += w;
+					ans += w;
+					if(ans == l) return l;
+				}
+				dis[s] = -1;
+				return ans;
+			};
+			ans += dfs(dfs, s, max - ans);
+		}
 		return ans;
 	}
-} G;
-
-int main() {
-	file();
-	int m,s,t; cin>>n>>m>>s>>t;
-	int x,y,z;
-	rep(i,1,m) cin>>x>>y>>z,G.link(x,y,z);
-	cout<<G.flow(s,t)<<'\n';
-	return 0;
+	auto getedges(int x) {
+		std::vector<std::pair<int, ll>> o;
+		for(auto [y, id] : e[x]) o.emplace_back(y, f[id]);
+		return o;
+	}
+};
+void matching() {
+	int l, r, m;
+	cin >> l >> r >> m;
+	maxflow s(l + r + 1);
+	for(int i = 1;i <= l;++i) s.add(0, i, 1);
+	for(int i = 1;i <= r;++i) s.add(i + l, l + r + 1, 1);
+	for(int i = 0, x, y;i < m;++i) {
+		cin >> x >> y;
+		x += 1;
+		y += 1;
+		s.add(x, y + l, 1);
+	}
+	cout << s.flow(0, l + r + 1) << '\n';
+	for(int i = 1;i <= l;++i) {
+		for(auto [y, f] : s.getedges(i)) {
+			if(f == 0 && y > i) {
+				cout << i - 1 << ' ' << y - 1 - l << '\n';
+			}
+		}
+	}
 }
+void loj() {
+	int n, m, s, t;
+	cin >> n >> m >> s >> t;
+	maxflow g(n + 1);
+	for(int i = 0, u, v, w;i < m;++i) {
+		cin >> u >> v >> w;
+		g.add(u, v, w);
+	}
+	cout << g.flow(s, t) << '\n';
+}
+int main() {
+	std::ios::sync_with_stdio(false), cin.tie(0);
+	loj();
+}
+
+

@@ -41,24 +41,34 @@
 
 \thispagestyle{empty}
 \pagebreak
-\twocolumn
 \end{titlepage}
 
+% ===== 页面样式 =====
 \pagestyle{fancy}
-    % \lhead{\large Peking University-Let it Rot}
-    \rhead{\Huge \thepage}
+% \lhead{\large Peking University-Let it Rot}
+\rhead{\Huge \thepage}
 
+% ===== 三栏目录页 =====
+\clearpage
+\onecolumn
+\begin{center}
+  \vspace*{-1em}
+  {\Huge \bfseries Contents}\\[1em]
+\end{center}
+
+\begin{spacing}{0.75}
+\begin{small}
+\begin{multicols}{3}
 \setcounter{tocdepth}{3}
-		%\let\cleardoublepage\relax
-		%\let\clearpage\relax
-		\begin{small}
-		\begin{spacing}{0.75}
-		\tableofcontents
-		\end{spacing}
-		\end{small}
+\tableofcontents
+\end{multicols}
+\end{small}
+\end{spacing}
 
+% ===== 回到两栏正文 =====
+\clearpage
+\twocolumn
 
-		\newpage
 \section{图论}
 
 \subsection{二分图匹配}
@@ -71,7 +81,9 @@
 \codesectiondesc{\subsubsection}{cpp}{contents/graph/matching/KM.cpp}{二分图最小权匹配}{返回左边每个点匹配的右边点的编号，左边的点不多于右边的点（必要时补点）。}
 \codesectiondesc{\subsubsection}{cpp}{contents/graph/matching/newkm.cpp}{二分图最小权匹配2}{ 最小权匹配。返回代价和、右边每个点匹配的左边点的编号、对应的边权。过程中能计算出匹配为 $0 \cdots |match|$ 的最优解。\par 时间复杂度 $O(|match|(L^2+|E|))$。 }
 
-\codesectiondesc{\subsection}{cpp}{contents/graph/dinic.cpp}{网络最大流 (dinic)}{}
+\codesectiondesc{\subsection}{cpp}{contents/graph/old_dinic.cpp}{网络最大流 (dinic)}{}
+
+\codesectiondesc{\subsection}{cpp}{contents/graph/dinic.cpp}{网络最大流 (dinic) 2}{这是 vector 版本，但不知道为什么很多情况不会快。至少清空好搞，没有经过严谨测试。}
 
 \codesectiondesc{\subsection}{cpp}{contents/graph/MCMF.cpp}{最小费用流}{}
 
@@ -153,12 +165,16 @@ $$
 \codesectiondesc{\subsection}{cpp}{contents/math/LP.cpp}{线性规划 (单纯形法)}{$x[1\cdots n]$ 是变量，$a[1\cdots m][\cdots]$ 是约束。\par 所有约束为： $$ \begin{aligned} \forall i \in [1, m] &: a[i][0] + \sum_{j=1}^{n} a[i][j] x[j] \geq 0 \\ \forall j \in [1, n] &: x[j] \geq 0 \end{aligned} $$ \par 最大化 $$ \sum_{j=1}^{n} a[0][j] x[j] $$ \par 如果无解返回 nan，如果无界返回 inf。最后的 $x$ 里存放的是最优解。}
 
 \codesectiondesc{\subsection}{cpp}{contents/math/Goldensectionsearch.cpp}{黄金三分}{返回 $f$ 在 $[min(a, c), max(a, c)]$ 上的极大值点 (f 需要是单峰函数)。}
+\codesectiondesc{\subsection}{cpp}{contents/math/charpoly.cpp}{特征多项式}{$ans_i = [\lambda^i] \det(\lambda I - A)$。}
+\codesectiondesc{\subsection}{cpp}{contents/math/det(a+bx).cpp}{det(A + B x)}{$ans_i = [x^i] \det(A + B x)$，要抄特征多项式。}
 
 \section{字符串}
 
 \codesectiondesc{\subsection}{cpp}{contents/string/SAM.cpp}{后缀自动机 SAM}{需要两倍点数量。}
 
 \codesectiondesc{\subsection}{cpp}{contents/string/PAM.cpp}{回文自动机 PAM}{}
+
+\codesectiondesc{\subsection}{cpp}{contents/string/pamdp.cpp}{回文自动机 PAM dp}{ atom 要赋值，然后 query 是 pam id, seq id，都要问。结果是 $\sum_{s[i:seq id+1] is palindrome} atom[i - 1]$}
 
 \codesectiondesc{\subsection}{cpp}{contents/string/AC自动机.cpp}{AC 自动机}{}
 

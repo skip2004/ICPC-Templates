@@ -1,40 +1,49 @@
-// S 编号最小，T 最大，或者改一下清空
-struct Dinic {
-	struct T {
-		int to, nxt, v;
-	} e[N << 3];
-	int h[N], head[N], num = 1;
-	void link(int x, int y, int v) {
-		e[++num] = {y, h[x], v}, h[x] = num;
-		e[++num] = {x, h[y], 0}, h[y] = num; // !!!
+struct maxflow {
+	int n;
+	std::vector<std::vector<std::array<int, 2>>> e;
+	std::vector<ll> f;
+	maxflow(int s) : n(s + 1), e(n) { }
+	void add(int x, int y, int v) {
+		e[x].push_back({y, (int)f.size()}); 
+		f.push_back(v);
+		e[y].push_back({x, (int)f.size()}); 
+		f.push_back(0);
 	}
-	int dis[N];
-	bool bfs(int s, int t) {
-		std::queue<int> Q;
-		for(int i = s;i <= t;++i) dis[i] = -1, head[i] = h[i]; //如果编号不是[S,T]，只要改这里
-		for(Q.push(t), dis[t] = 0;!Q.empty();) {
-			int x = Q.front(); Q.pop();
-			for(int i = h[x];i;i = e[i].nxt) if(e[i ^ 1].v && dis[e[i].to] < 0) {
-				dis[e[i].to] = dis[x] + 1, Q.push(e[i].to);
+	ll flow(int s, int t, ll max = 1e18) {
+		ll ans = 0;
+		std::vector<int> dis(n), h(n);
+		for(;ans < max;) {
+			for(int i = 0;i < n;++i) dis[i] = -1, h[i] = e[i].size() - 1;
+			std::queue<int> q;
+			for(q.push(t), dis[t] = 0;q.size();) {
+				int x = q.front(); q.pop();
+				for(auto [y, id] : e[x]) if(dis[y] < 0 && f[id ^ 1]) {
+					dis[y] = dis[x] + 1, q.push(y);
+					if(y == s) break;
+				}
 			}
-		}
-		return dis[s] >= 0;
-	}
-	int dfs(int s, int t, int lim) {
-		if(s == t || !lim) return lim;
-		int ans = 0, mn;
-		for(int & i = head[s];i;i = e[i].nxt) {
-			if(dis[e[i].to] + 1 == dis[s] && (mn = dfs(e[i].to, t, std::min(lim, e[i].v)))) {
-				e[i].v -= mn, e[i ^ 1].v += mn;
-				ans += mn, lim -= mn;
-				if(!lim) break;
-			}
+			if(dis[s] < 0) break;
+			auto dfs = [&](auto dfs, int s, ll l) {
+				if(s == t) return l;
+				ll ans = 0;
+				for(int & i = h[s];i >= 0;--i) {
+					auto [y, id] = e[s][i];
+					if(dis[y] + 1 != dis[s] || !f[id]) continue;
+					ll w = dfs(dfs, y, std::min(l - ans, f[id]));
+					f[id] -= w, f[id ^ 1] += w;
+					ans += w;
+					if(ans == l) return l;
+				}
+				dis[s] = -1;
+				return ans;
+			};
+			ans += dfs(dfs, s, max - ans);
 		}
 		return ans;
 	}
-	int flow(int s, int t) {
-		int ans = 0;
-		for(;bfs(s, t);) ans += dfs(s, t, 1e9);
-		return ans;
+	auto getedges(int x) {
+		std::vector<std::pair<int, ll>> o;
+		for(auto [y, id] : e[x]) o.emplace_back(y, f[id]);
+		return o;
 	}
-} G;
+};
