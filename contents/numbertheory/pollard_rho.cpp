@@ -1,12 +1,11 @@
 ll rho(ll n) {
 	if(!(n & 1)) return 2;
-	static std::mt19937_64 gen((size_t)"hehezhou");
-	ll x = 0, y = 0, prod = 1;
-	auto f = [&](ll o) { return mul(o, o) + 1; };
-	setmod(n);
-	for(int t = 30, z = 0;t % 64 || std::gcd(prod, n) == 1;++t) {
-		if (x == y) x = ++ z, y = f(x);
-		if(ll q = mul(prod, x + n - y)) prod = q;
+	static std::mt19937_64 gen(42);
+	ll x = 0, y = 0, prod = 1, g = gen() % n;
+	auto f = [&](ll o) { return mul(o, o) + g; };
+	for(int t = 28, z = 0;t % 32 || std::gcd(prod, n) == 1;++t) {
+		if(ll q = mul(prod, x - y)) prod = q;
+		else y = x = ++z, g = gen() % n;
 		x = f(x), y = f(f(y));
 	}
 	return std::gcd(prod, n);

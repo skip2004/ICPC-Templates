@@ -233,6 +233,8 @@ $$
 \codesectiondesc{\subsection}{cpp}{contents/misc/pragma.cpp}{Pragma}{}
 \codesectiondesc{\subsection}{cpp}{contents/misc/Barrett.cpp}{Barrett}{}
 \codesectiondesc{\subsection}{cpp}{contents/misc/fastdivcheck.cpp}{快速整除判定}{要求 $p$ 是奇数。如果是 (u)int128，求逆循环次数要改成 $6$。}
+\codesectiondesc{\subsection}{cpp}{contents/misc/montgomery.cpp}{Montgomery}{要求 $p$ 是奇数，不要超过 $2^{62}$。reduce 计算 $\frac{x}{2^{64}} \pmod p$，如果输入在 $[0, p \times 2^{64})$ 内，返回值在 $[0, 2p)$ 内。}
+\codesectiondesc{\subsection}{cpp}{contents/misc/pragma.cpp}{Pragma}{}
 \codesectiondesc{\subsection}{cpp}{contents/misc/lcs.cpp}{LCS}{}
 \codesectiondesc{\subsection}{cpp}{contents/misc/zeller.cpp}{日期公式}{getday 返回自 $1/1/1$ 起到 $y/m/d$ 的天数，$1/1/1$ 是星期一，所以模 $7$ 可以得算出是周几。\par date 是 getday 的逆。}
 \codesectiondesc{\subsection}{cpp}{contents/misc/xorshift.cpp}{Xorshift}{}
