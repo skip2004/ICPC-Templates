@@ -151,6 +151,7 @@ $$
 \codesectiondesc{\subsection}{cpp}{contents/math/online_convolution.cpp}{全在线卷积}{}
 
 \codesectiondesc{\subsection}{cpp}{contents/math/poly-composition.cpp}{多项式复合}{ $res(x) = f(g(x)) \bmod x^n$，$g(0) = 0$, $deg(f), deg(g) < n$。}
+\codesectiondesc{\subsection}{cpp}{contents/math/power-projection.cpp}{Power Projection}{ $deg(f) = deg(g) = n - 1, g(0) = 0$，返回 $ans[i] = [x^{n-1}] f(x) g(x)^{i}, i = 0, \cdots, n-1$}
 
 \subsection{常系数线性递推}
 
@@ -183,6 +184,7 @@ $$
 \codesectiondesc{\subsection}{cpp}{contents/string/Zalgo.cpp}{Z algorithm}{返回的 $lcp[i] = lcp(s, s[i:])$。}
 
 \codesectiondesc{\subsection}{cpp}{contents/string/manacher.cpp}{Manacher}{返回每个回文中心的回文半径大小，奇偶分开考虑。}
+\codesectiondesc{\subsection}{cpp}{contents/string/kmp.cpp}{KMP}{$s.size()>0$, $b_i$ 为最大的 $j<i$，使得 $s[:j] = s[i-j:i]$}
 
 \codesectiondesc{\subsection}{cpp}{contents/string/minrep.cpp}{最小表示法}{返回 $s$ 的最小表示的起始位置。可以用 rotate 算出最小表示的字符串。}
 

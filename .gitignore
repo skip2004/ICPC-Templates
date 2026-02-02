@@ -1,4 +1,5 @@
 ## Core latex/pdflatex auxiliary files:
+*.minted
 *.aux
 *.lof
 *.log
